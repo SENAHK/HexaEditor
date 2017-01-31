@@ -1,6 +1,6 @@
 ﻿namespace HexaEditor
 {
-    partial class Form1
+    partial class viewHexaEditor
     {
         /// <summary>
         /// Variable nécessaire au concepteur.

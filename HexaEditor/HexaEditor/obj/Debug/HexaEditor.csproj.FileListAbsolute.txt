@@ -1,1 +1,2 @@
 E:\School\3rd_year\C#\HexaEditor\HexaEditor\bin\Debug\HexaEditor.exe.config
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\bin\Debug\HexaEditor.exe.config
