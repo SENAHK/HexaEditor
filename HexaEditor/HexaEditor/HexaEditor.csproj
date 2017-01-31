@@ -59,16 +59,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="viewHexaEditor.cs">
+    <Compile Include="ModelHexaEditor.cs" />
+    <Compile Include="ViewHexaEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="viewHexaEditor.Designer.cs">
-      <DependentUpon>viewHexaEditor.cs</DependentUpon>
+    <Compile Include="ViewHexaEditor.Designer.cs">
+      <DependentUpon>ViewHexaEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="viewHexaEditor.resx">
-      <DependentUpon>viewHexaEditor.cs</DependentUpon>
+    <EmbeddedResource Include="ViewHexaEditor.resx">
+      <DependentUpon>ViewHexaEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

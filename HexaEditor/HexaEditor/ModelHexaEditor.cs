@@ -8,5 +8,6 @@ namespace HexaEditor
 {
     class ModelHexaEditor
     {
+        
     }
 }
