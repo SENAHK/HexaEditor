@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HexaEditor
 {
-    public partial class viewHexaEditor : Form
+    public partial class ViewHexaEditor : Form
     {
-        public viewHexaEditor()
+        public ViewHexaEditor()
         {
             InitializeComponent();
         }

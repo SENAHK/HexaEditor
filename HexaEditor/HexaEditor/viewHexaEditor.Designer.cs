@@ -1,6 +1,6 @@
 ﻿namespace HexaEditor
 {
-    partial class viewHexaEditor
+    partial class ViewHexaEditor
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // viewHexaEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 267);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(595, 417);
+            this.Name = "viewHexaEditor";
+            this.Text = "Hexa File Editor";
             this.ResumeLayout(false);
 
         }

@@ -16,7 +16,7 @@ namespace HexaEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new viewHexaEditor());
+            Application.Run(new ViewHexaEditor());
         }
     }
 }
