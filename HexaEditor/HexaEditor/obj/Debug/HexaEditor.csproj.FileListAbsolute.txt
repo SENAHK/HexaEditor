@@ -1,2 +1,10 @@
 E:\School\3rd_year\C#\HexaEditor\HexaEditor\bin\Debug\HexaEditor.exe.config
 E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\bin\Debug\HexaEditor.exe.config
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\bin\Debug\HexaEditor.exe
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\bin\Debug\HexaEditor.pdb
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\obj\Debug\HexaEditor.csprojResolveAssemblyReference.cache
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\obj\Debug\HexaEditor.ViewHexaEditor.resources
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\obj\Debug\HexaEditor.Properties.Resources.resources
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\obj\Debug\HexaEditor.csproj.GenerateResource.Cache
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\obj\Debug\HexaEditor.exe
+E:\School\3eme\HexaEditor\HexaEditor\HexaEditor\obj\Debug\HexaEditor.pdb
