@@ -28,13 +28,11 @@ namespace HexaEditor
 
         private void ViewHexaEditor_Load(object sender, EventArgs e)
         {
-            //string[,] chaines = new string[3, 2] { { "one", "two" }, { "three", "four" }, { "five", "six" } };
-            string[,] chaines = new string[4, 17];
-
-            //WriteInPictureBox(pbxOutput, chaines);
+            
 
 
         }
+
 
         public void WriteInPictureBox(PictureBox pbx, string[] values)
         {
@@ -44,21 +42,38 @@ namespace HexaEditor
             // Largeur du tableau
             int valuesX = 16;
 
-            int valuesY = values.GetLength(0);
+            int valuesY = values.Length > 16 ? values.Length / 16 : 1;
 
             int width = pbx.Size.Width / valuesX;
             int height = pbx.Size.Height / valuesY;
 
             string output = "";
-
             for (int y = 0; y < valuesY; y++)
             {
                 for (int x = 0; x < valuesX; x++)
                 {
+                    // En-tête
+                    if (y == 0)
+                    {
+                        if (x == 0)
+                            output = "Offset";
+                        else
+                            output = String.Format("{0:X}", x);
 
-                    output = values[y, x];
-                    Rectangle rect = new Rectangle(x * width, y * height, width, height);
-                    g.DrawString(output, new Font("Courier New", 16), Brushes.Black, rect);
+                    }
+                    else
+                    {
+                        if (x == 0)
+                        {
+                            output = String.Format("{0:X}", y);
+                        }
+                        else
+                        {
+                            output = values[y + x];
+                            Rectangle rect = new Rectangle(x * width, y * height, width, height);
+                            g.DrawString(output, new Font("Courier New", 16), Brushes.Black, rect);
+                        }
+                    }
                 }
             }
             pbx.Image = DrawArea;

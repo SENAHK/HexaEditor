@@ -36,6 +36,13 @@ namespace HexaEditor
             {
                 for (int x = 0; x < valuesX; x++)
                 {
+                    
+            string output = "";
+
+            for (int y = 0; y < valuesY; y++)
+            {
+                for (int x = 0; x < valuesX; x++)
+                {
                     output = values[y, x];
                     
                     Rectangle rect = new Rectangle(x * width, y * height, width, height);
