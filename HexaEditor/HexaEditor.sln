@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexaEditor", "HexaEditor\HexaEditor.csproj", "{C12338FC-A108-4D2E-95B5-19CCF67A41EB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17249A89-AFB3-4306-A2A8-E00FB7050B61}"
+	ProjectSection(SolutionItems) = preProject
+		HexaEditor\Reader.cs = HexaEditor\Reader.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
