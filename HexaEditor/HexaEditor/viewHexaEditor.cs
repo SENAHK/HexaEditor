@@ -30,17 +30,20 @@ namespace HexaEditor
         {
             //string[,] chaines = new string[3, 2] { { "one", "two" }, { "three", "four" }, { "five", "six" } };
             string[,] chaines = new string[4, 17];
-            Model.WriteInPictureBox(pbxOutput, chaines);
+
+            //WriteInPictureBox(pbxOutput, chaines);
 
 
         }
 
-        public void WriteInPictureBox(PictureBox pbx, string[,] values)
+        public void WriteInPictureBox(PictureBox pbx, string[] values)
         {
             Bitmap DrawArea = new Bitmap(pbx.Size.Width, pbx.Size.Height);
             Graphics g = Graphics.FromImage(DrawArea);
 
-            int valuesX = values.GetLength(1);
+            // Largeur du tableau
+            int valuesX = 16;
+
             int valuesY = values.GetLength(0);
 
             int width = pbx.Size.Width / valuesX;
