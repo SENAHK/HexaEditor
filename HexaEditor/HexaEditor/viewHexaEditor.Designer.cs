@@ -39,6 +39,7 @@
             this.pbxOutput.Size = new System.Drawing.Size(425, 341);
             this.pbxOutput.TabIndex = 0;
             this.pbxOutput.TabStop = false;
+            this.pbxOutput.Click += new System.EventHandler(this.pbxOutput_Click);
             // 
             // ViewHexaEditor
             // 

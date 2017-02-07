@@ -102,5 +102,10 @@ namespace HexaEditor
                 }
             }
         }
+
+        private void pbxOutput_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace HexaEditor
     {
         private Reader fileReader;
         public ulong page;
-        private static const ulong PAGECAPACITY = 16 * 32;
+        private const ulong PAGECAPACITY = 16 * 32;
 
         public ModelHexaEditor()
         {
@@ -30,13 +30,6 @@ namespace HexaEditor
             int width = pbx.Size.Width / valuesX;
             int height = pbx.Size.Height / valuesY;
 
-            string output = "";
-
-            for (int y = 0; y < valuesY; y++)
-            {
-                for (int x = 0; x < valuesX; x++)
-                {
-                    
             string output = "";
 
             for (int y = 0; y < valuesY; y++)
