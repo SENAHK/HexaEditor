@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace ConsoModelHexa
+namespace HexaEditor
 {
-    class Reader
+    public class Reader
     {
         /// PARAM  \\
 

@@ -10,6 +10,9 @@ namespace HexaEditor
 {
     public class ModelHexaEditor
     {
+        private Reader fileReader;
+        public ulong page;
+        private static const ulong PAGECAPACITY = 16 * 32;
 
         public ModelHexaEditor()
         {
@@ -33,18 +36,35 @@ namespace HexaEditor
             {
                 for (int x = 0; x < valuesX; x++)
                 {
-                    if (x == 0)
-                    {
-                        output = 
-                    }else{
                     output = values[y, x];
-                    }
+                    
                     Rectangle rect = new Rectangle(x * width, y * height, width, height);
                     g.DrawString(output, new Font("Courier New", 16), Brushes.Black, rect);
                 }
             }
             pbx.Image = DrawArea;
             g.Dispose();
+        }
+        /// <summary>
+        /// Donne un tableau du nombre de valeur correspondant à la constante PAGECAPACITY, en fonction de la variable page
+        /// </summary>
+        /// <returns></returns>
+        public string[] getPageContent()
+        {
+            string[] values = new string[PAGECAPACITY];
+            ulong start = PAGECAPACITY * page;
+            ulong stop = start + PAGECAPACITY;
+            int count = 0;
+
+
+            for (ulong i = start; i < stop; i++)
+            {
+                values[count] = fileReader.getHexa(i);
+
+                count++;                 
+            }
+
+            return values;
         }
     }
 }
