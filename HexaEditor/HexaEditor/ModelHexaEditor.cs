@@ -43,11 +43,11 @@ namespace HexaEditor
             }
 
             return values;
-            
+
         }
 
         /// CONVERTING FUNCTIONS \\\
-        
+
         /// <summary>
         /// Retourne la valeur d'un entier non signé de 8 bit
         /// </summary>
@@ -102,7 +102,7 @@ namespace HexaEditor
             return (Convert.ToInt32(binary32, 2)).ToString();
         }
         /// <summary>
-        }
+
 
         /// <summary>
         /// Création d'une image bitmap contenant les valeurs passé en paramètres
@@ -161,6 +161,7 @@ namespace HexaEditor
                 }
             }
             return DrawArea;
+        }
         /// Retourne la valeur d'un entier signé de 64 bits
         /// </summary>
         /// <param name="position"></param>
@@ -227,13 +228,11 @@ namespace HexaEditor
             {
                 for (int x = 0; x < valuesX; x++)
                 {
-                    
-                        // Valeurs à afficher
-                        int key = y * 16 + x;
-                        UInt32 val = Convert.ToUInt32(values[key][0]) + Convert.ToUInt32(values[key][1]);
-                        char c = (val == 0) ? '.' : Convert.ToChar(val);
-                        output = c.ToString();
-                    
+
+                    // Valeurs à afficher
+                    int key = y * 16 + x;
+                    char chr = getASCII((ulong)key);
+                    output = (chr != (char)0) ? chr.ToString() : '.'.ToString();
 
                     Rectangle rect = new Rectangle(x * width, y * height, width * 2, height * 2);
                     // Afficher les éléments du tableau dans une surface de dessin
