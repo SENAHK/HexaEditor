@@ -145,5 +145,9 @@ namespace HexaEditor
             }
             return '0';
         }
+        public byte GetValue(ulong offset)
+        {
+            return Data[offset];
+        }
     }
 }
