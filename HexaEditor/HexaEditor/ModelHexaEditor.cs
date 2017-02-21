@@ -43,6 +43,65 @@ namespace HexaEditor
             }
 
             return values;
+            
+        }
+
+        /// CONVERTING FUNCTIONS \\\
+        
+        /// <summary>
+        /// Retourne la valeur d'un entier non signé de 8 bit
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getByte(ulong position)
+        {
+            return fileReader.GetValue(position).ToString();
+        }
+
+        /// <summary>
+        /// Retourne la valeur d'un entier signé de 8 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getSByte(ulong position)
+        {
+            return ((sbyte)fileReader.GetValue(position)).ToString();
+        }
+        /// <summary>
+        /// Retourne la valeur d'un entier non signé de 16 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getInt16(ulong position)
+        {
+            string binary = Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            string binary16 = binary + "00000000";
+            return (Convert.ToUInt16(binary16, 2)).ToString();
+        }
+        /// <summary>
+        /// Retourne la valeur d'un entier non signé de 16 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getUint16(ulong position)
+        {
+            string binary = Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            string binary16 = binary + "00000000";
+            return (Convert.ToUInt16(binary16, 2)).ToString();
+        }
+
+        /// <summary>
+        /// Retourne la valeur d'un entier signé de 23 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getInt32(ulong position)
+        {
+            string binary = Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            string binary32 = binary + "00000000" + "00000000" + "00000000";
+            return (Convert.ToInt32(binary32, 2)).ToString();
+        }
+        /// <summary>
         }
 
         /// <summary>
@@ -102,6 +161,49 @@ namespace HexaEditor
                 }
             }
             return DrawArea;
+        /// Retourne la valeur d'un entier signé de 64 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getInt64(ulong position)
+        {
+            return ((long)(fileReader.GetValue(position) * 72057594037927936)).ToString();
+        }
+        /// <summary>
+        /// Retourne la valeur binaire
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getBinary(ulong position)
+        {
+            return Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+        }
+        /// <summary>
+        /// Retourne la valeur d'un décimal sur 32 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getFloat(ulong position)
+        {
+            return string.Empty;
+        }
+        /// <summary>
+        /// Retourne la valeur d'un décimal sur 64 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getDouble(ulong position)
+        {
+            return string.Empty;
+        }
+        /// <summary>
+        /// Retourne le caractère correspondant au code ASCII donnéS
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public char getASCII(ulong position)
+        {
+            return (char)fileReader.GetValue(position);
         }
     }
 }
