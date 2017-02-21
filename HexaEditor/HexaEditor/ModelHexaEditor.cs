@@ -16,7 +16,7 @@ namespace HexaEditor
         public ModelHexaEditor()
         {
 
-        }       
+        }
 
         public void initReader(string path)
         {
@@ -150,7 +150,7 @@ namespace HexaEditor
                         else
                         {
                             // Valeurs à afficher
-                            output = values[y + x];
+                            output = values[(y - 1) * 16 + x - 1];
                         }
                     }
 
@@ -204,6 +204,43 @@ namespace HexaEditor
         public char getASCII(ulong position)
         {
             return (char)fileReader.GetValue(position);
+        }
+
+        public Bitmap generateDrawnValuesAsAscii(string[] values, int imageWidth, int imageHeight)
+        {
+            Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);
+            Graphics g = Graphics.FromImage(DrawArea);
+
+            // Largeur du tableau fixe à 16
+            int valuesX = 16;
+
+            // Hauteur du tableau: si plus grand que 16 (càd une ligne), divisé par 16
+            int valuesY = values.Length > 16 ? values.Length / 16 : 1;
+
+            // Largeur et hauteur des rectangles
+            int width = imageWidth / valuesX;
+            int height = imageHeight / valuesY;
+
+            string output = "";
+
+            for (int y = 0; y < valuesY; y++)
+            {
+                for (int x = 0; x < valuesX; x++)
+                {
+                    
+                        // Valeurs à afficher
+                        int key = y * 16 + x;
+                        UInt32 val = Convert.ToUInt32(values[key][0]) + Convert.ToUInt32(values[key][1]);
+                        char c = (val == 0) ? '.' : Convert.ToChar(val);
+                        output = c.ToString();
+                    
+
+                    Rectangle rect = new Rectangle(x * width, y * height, width * 2, height * 2);
+                    // Afficher les éléments du tableau dans une surface de dessin
+                    g.DrawString(output, new Font("Courier New", 8), Brushes.Black, rect);
+                }
+            }
+            return DrawArea;
         }
     }
 }
