@@ -33,7 +33,7 @@ namespace HexaEditor
 
             Model.initReader(@"C:\Users\ramusim_info\Desktop\sample.dll");
             string[] values = Model.getPageContent(1);
-            WriteInPictureBox(pbxOutput, values);
+            pbxOutput.Image = Model.GenerateDrawnValues(values, pbxOutput.Width, pbxOutput.Height);
         }
 
         /// <summary>
