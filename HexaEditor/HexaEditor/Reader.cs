@@ -14,7 +14,7 @@ namespace HexaEditor
 
         //Bytes contenu dans le ficher
         private byte[] _data;
-        private byte[] Data
+        public byte[] Data
         {
             get { return _data; }
             set { _data = value; }
