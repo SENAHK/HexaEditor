@@ -12,7 +12,19 @@ namespace HexaEditor
     {
         private Reader fileReader;
         private const ulong PAGECAPACITY = 16 * 32;
+        private List<Rectangle> cases = new List<Rectangle>();
+        private List<Rectangle> casesASCII = new List<Rectangle>();
 
+        public List<Rectangle> CasesASCII
+        {
+            get { return casesASCII; }
+            set { casesASCII = value; }
+        }
+        public List<Rectangle> Cases
+        {
+            get { return cases; }
+            set { cases = value; }
+        }
         public ModelHexaEditor()
         {
 
@@ -128,14 +140,14 @@ namespace HexaEditor
 
             string output = "";
 
-            for (int y = 0; y < valuesY; y++)
+            for (int y = -1; y < valuesY; y++)
             {
-                for (int x = 0; x < valuesX; x++)
+                for (int x = -1; x < valuesX; x++)
                 {
                     // En-tête de colonnes
-                    if (y == 0)
+                    if (y < 0)
                     {
-                        if (x == 0)
+                        if (x < 0)
                             output = "";
                         else
                             output = "0" + String.Format("{0:X}", x);
@@ -143,21 +155,25 @@ namespace HexaEditor
                     else
                     {
                         // Titres de lignes
-                        if (x == 0)
+                        if (x < 0)
                         {
                             output = String.Format("{0:X}", y);
                         }
                         else
                         {
                             // Valeurs à afficher
-                            output = values[(y - 1) * 16 + x - 1];
+                            output = values[y * 16 + x];
                         }
                     }
 
-                    Rectangle rect = new Rectangle(x * width, y * height, width * 2, height * 2);
+                    Rectangle rect = new Rectangle((x + 1) * width, (y + 1) * height, width, height + 1);
+
+                    if (y >= 0 && x >= 0)
+                        this.Cases.Add(rect);
+
                     // Afficher les éléments du tableau dans une surface de dessin
-                    Brush brush = x == 0 || y == 0 ? Brushes.Blue : Brushes.Black;
-                    g.DrawString(output, new Font("Courier New", 8), brush, rect);
+                    Brush brush = ((x < 0) || (y < 0)) ? Brushes.Blue : Brushes.Black;
+                    g.DrawString(output, new Font("Tahoma", 8), brush, rect);
                 }
             }
             return DrawArea;
@@ -234,7 +250,8 @@ namespace HexaEditor
                     char chr = getASCII((ulong)key);
                     output = (chr != (char)0) ? chr.ToString() : '.'.ToString();
 
-                    Rectangle rect = new Rectangle(x * width, y * height, width * 2, height * 2);
+                    Rectangle rect = new Rectangle(x * width, y * height, width, height + 1);
+                    this.CasesASCII.Add(rect);
                     // Afficher les éléments du tableau dans une surface de dessin
                     g.DrawString(output, new Font("Courier New", 8), Brushes.Black, rect);
                 }
