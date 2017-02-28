@@ -133,7 +133,7 @@ namespace HexaEditor
             return hexa;
         }
         //Convertit une valeur décimale entre 0 et 15 en une valeur hexadécimale 
-        private char hexaWrite(int value)
+        public char hexaWrite(int value)
         {
             if (value < 10)
             {

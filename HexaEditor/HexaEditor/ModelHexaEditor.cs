@@ -113,7 +113,7 @@ namespace HexaEditor
             string binary32 = binary + "00000000" + "00000000" + "00000000";
             return (Convert.ToInt32(binary32, 2)).ToString();
         }
-        /// <summary>
+        
 
 
         /// <summary>
