@@ -12,6 +12,21 @@ namespace HexaEditor
     {
         //Contient les données entières du fichier
         private Reader fileReader;
+        private ulong page;
+        public ulong Page
+        {
+            get { return page; }
+            set 
+            {
+                ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
+
+                if (value >= 0 && value < length)
+                {
+                    page = value; 
+                }
+            }
+        }
+
         private const ulong PAGECAPACITY = 16 * 32;
         private List<Rectangle> cases = new List<Rectangle>();
         private List<Rectangle> casesASCII = new List<Rectangle>();
@@ -62,9 +77,9 @@ namespace HexaEditor
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public char[] getASCIIpage(ulong page)
+        public string[] getASCIIpage(ulong page)
         {
-            char[] ASCIIpage = new char[PAGECAPACITY];
+            string[] ASCIIpage = new string[PAGECAPACITY];
             ulong start = PAGECAPACITY * page;
             ulong stop = start + PAGECAPACITY;
             int count = 0;
@@ -72,7 +87,7 @@ namespace HexaEditor
 
             for (ulong i = start; i < stop; i++)
             {
-                ASCIIpage[count] = this.getASCII(i);
+                ASCIIpage[count] = this.getASCII(i).ToString();
 
                 count++;
             }
