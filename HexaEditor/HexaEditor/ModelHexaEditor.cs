@@ -16,14 +16,21 @@ namespace HexaEditor
         public ulong Page
         {
             get { return page; }
-            set 
-            {
-                ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
+        }
+        public void nextPage()
+        {
+            ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
 
-                if (value >= 0 && value < length)
-                {
-                    page = value; 
-                }
+            if (page < length)
+            {
+                page++;
+            }
+        }
+        public void previousPage()
+        {
+            if (page > 0)
+            {
+                page--;
             }
         }
 
@@ -55,7 +62,7 @@ namespace HexaEditor
         /// Donne un tableau du nombre de valeur correspondant à la constante PAGECAPACITY, en fonction de la variable page
         /// </summary>
         /// <returns></returns>
-        public string[] getPageContent(ulong page)
+        public string[] getPageContent()
         {
             string[] values = new string[PAGECAPACITY];
             ulong start = PAGECAPACITY * page;
@@ -77,7 +84,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public string[] getASCIIpage(ulong page)
+        public string[] getASCIIpage()
         {
             string[] ASCIIpage = new string[PAGECAPACITY];
             ulong start = PAGECAPACITY * page;
