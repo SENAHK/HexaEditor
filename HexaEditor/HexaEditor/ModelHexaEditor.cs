@@ -10,6 +10,7 @@ namespace HexaEditor
 {
     public class ModelHexaEditor
     {
+        //Contient les données entières du fichier
         private Reader fileReader;
         private const ulong PAGECAPACITY = 16 * 32;
         private List<Rectangle> cases = new List<Rectangle>();
@@ -55,7 +56,28 @@ namespace HexaEditor
             }
 
             return values;
+        }
+        /// <summary>
+        /// DOnne un tableau du nombre de valeur corrrespondant à la constante PAGECAPACITY, au format ASCII
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public char[] getASCIIpage(ulong page)
+        {
+            char[] ASCIIpage = new char[PAGECAPACITY];
+            ulong start = PAGECAPACITY * page;
+            ulong stop = start + PAGECAPACITY;
+            int count = 0;
 
+
+            for (ulong i = start; i < stop; i++)
+            {
+                ASCIIpage[count] = this.getASCII(i);
+
+                count++;
+            }
+
+            return ASCIIpage;
         }
 
         /// CONVERTING FUNCTIONS \\\
@@ -69,7 +91,6 @@ namespace HexaEditor
         {
             return fileReader.GetValue(position).ToString();
         }
-
         /// <summary>
         /// Retourne la valeur d'un entier signé de 8 bits
         /// </summary>
@@ -101,7 +122,6 @@ namespace HexaEditor
             string binary16 = binary + "00000000";
             return (Convert.ToUInt16(binary16, 2)).ToString();
         }
-
         /// <summary>
         /// Retourne la valeur d'un entier signé de 23 bits
         /// </summary>
@@ -178,6 +198,8 @@ namespace HexaEditor
             }
             return DrawArea;
         }
+
+
         /// Retourne la valeur d'un entier signé de 64 bits
         /// </summary>
         /// <param name="position"></param>
@@ -222,6 +244,7 @@ namespace HexaEditor
         {
             return (char)fileReader.GetValue(position);
         }
+
 
         public Bitmap generateDrawnValuesAsAscii(string[] values, int imageWidth, int imageHeight)
         {
