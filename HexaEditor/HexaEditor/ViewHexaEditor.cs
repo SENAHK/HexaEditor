@@ -46,14 +46,11 @@ namespace HexaEditor
             // Down
             if (e.Delta < 0)
             {
-                this.page += 1;
+                this.Model.nextPage();
             }
             else
             {
-                if (this.page > 0)
-                {
-                    this.page -= 1;
-                }
+                this.Model.previousPage();
             }
             RefreshOutput();
         }
@@ -66,12 +63,13 @@ namespace HexaEditor
         public void RefreshOutput()
         {
             // Values to show (page)
-            string[] values = Model.getPageContent(page);
+            string[] values = Model.getPageContent();
 
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(values, pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
 
+            // ADasdfjaosfjassofj MODIFIER ICI TODODODODOD asdasd
             pbxAscii.Image = Model.generateDrawnValuesAsAscii(values, pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
         }
@@ -83,7 +81,7 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxOutput_Paint(object sender, PaintEventArgs e)
         {
-            selectCase(this.Model.Cases, Model.getPageContent(page), e);
+            selectCase(this.Model.Cases, Model.getPageContent(), e);
         }
 
         /// <summary>
@@ -93,12 +91,12 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxAscii_Paint(object sender, PaintEventArgs e)
         {
-            string[] values = Model.getPageContent(page);
-            for (int i = 0; i < values.Length; i++)
-            {
-                values[i] = Model.getASCII((ulong)i).ToString();
-            }
-            selectCase(this.Model.CasesASCII, values, e);
+            //string[] values = Model.getASCIIpage();
+            //for (int i = 0; i < values.Length; i++)
+            //{
+            //    values[i] = Model.getASCII((ulong)i).ToString();
+            //}
+            selectCase(this.Model.CasesASCII, Model.getASCIIpage(), e);
         }
 
         /// <summary>

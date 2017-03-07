@@ -12,11 +12,7 @@ namespace HexaEditor
     {
         //Contient les données entières du fichier
         private Reader fileReader;
-        private ulong page;
-        public ulong Page
-        {
-            get { return page; }
-        }
+        private ulong page = 0;
         public void nextPage()
         {
             ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
@@ -50,7 +46,6 @@ namespace HexaEditor
         }
         public ModelHexaEditor()
         {
-
         }
 
         public void initReader(string path)
@@ -191,20 +186,23 @@ namespace HexaEditor
                         if (x < 0)
                             output = "";
                         else
-                            output = "0" + String.Format("{0:X}", x);
+                            output = Convert.ToString(x, 16).ToUpper();
                     }
                     else
                     {
                         // Titres de lignes
                         if (x < 0)
-                        {
-                            output = String.Format("{0:X}", y);
+                        {                   
+                            output = Convert.ToString(y + (int)page * 32, 16).ToUpper();
                         }
                         else
                         {
                             // Valeurs à afficher
                             output = values[y * 16 + x];
                         }
+
+                        string magie = Convert.ToString(154, 16);
+
                     }
 
                     Rectangle rect = new Rectangle((x + 1) * width, (y + 1) * height, width, height + 1);
