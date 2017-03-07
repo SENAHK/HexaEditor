@@ -14,7 +14,8 @@ namespace HexaEditor
     {
         private ModelHexaEditor _model;
         private int _selectedCase = 0;
-
+        private const int ARRAY_WIDTH = 16;
+        private ulong page = 0;
         public int SelectedCase
         {
             get { return _selectedCase; }
@@ -27,21 +28,45 @@ namespace HexaEditor
             set { _model = value; }
         }
 
-        private const int ARRAY_WIDTH = 16;
+
 
         public ViewHexaEditor()
         {
             InitializeComponent();
             Model = new ModelHexaEditor();
+
+            // File to read
+            Model.initReader(@"C:\Users\ramusim_info\Desktop\sample.dll");
+
+            this.MouseWheel += ViewHexaEditor_MouseWheel;
+        }
+
+        void ViewHexaEditor_MouseWheel(object sender, MouseEventArgs e)
+        {
+            // Down
+            if (e.Delta < 0)
+            {
+                this.page += 1;
+            }
+            else
+            {
+                if (this.page > 0)
+                {
+                    this.page -= 1;
+                }
+            }
+            RefreshOutput();
         }
 
         private void ViewHexaEditor_Load(object sender, EventArgs e)
         {
-            // File to read
-            Model.initReader(@"C:\Users\ramusim_info\Desktop\sample.dll");
+            RefreshOutput();
+        }
 
+        public void RefreshOutput()
+        {
             // Values to show (page)
-            string[] values = Model.getPageContent(0);
+            string[] values = Model.getPageContent(page);
 
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(values, pbxOutput.Width, pbxOutput.Height);
@@ -51,7 +76,6 @@ namespace HexaEditor
             pbxAscii.Invalidate();
         }
 
-
         /// <summary>
         /// Paint the selection cursor in the hexa picturebox
         /// </summary>
@@ -59,7 +83,7 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxOutput_Paint(object sender, PaintEventArgs e)
         {
-            selectCase(this.Model.Cases, Model.getPageContent(0), e);
+            selectCase(this.Model.Cases, Model.getPageContent(page), e);
         }
 
         /// <summary>
@@ -69,7 +93,7 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxAscii_Paint(object sender, PaintEventArgs e)
         {
-            string[] values = Model.getPageContent(0);
+            string[] values = Model.getPageContent(page);
             for (int i = 0; i < values.Length; i++)
             {
                 values[i] = Model.getASCII((ulong)i).ToString();
@@ -103,16 +127,16 @@ namespace HexaEditor
             switch (e.KeyData)
             {
                 case Keys.Right:
-                        SelectedCase += 1;
+                    SelectedCase += 1;
                     break;
                 case Keys.Down:
-                        SelectedCase += 16;
+                    SelectedCase += 16;
                     break;
                 case Keys.Up:
-                        SelectedCase -= 16;
+                    SelectedCase -= 16;
                     break;
                 case Keys.Left:
-                        SelectedCase -=1;
+                    SelectedCase -= 1;
                     break;
 
                 default:
