@@ -143,7 +143,6 @@ namespace HexaEditor
                     break;
             }
 
-            label1.Text = SelectedCase.ToString();
             // If the cell is out of range
             if (SelectedCase < 0 || SelectedCase > 511)
             {

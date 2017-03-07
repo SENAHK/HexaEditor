@@ -172,7 +172,6 @@ namespace HexaEditor
 
             // Largeur du tableau fixe à 16
             int valuesX = 16;
-
             // Hauteur du tableau: si plus grand que 16 (càd une ligne), divisé par 16
             int valuesY = values.Length > 16 ? values.Length / 16 : 1;
 
