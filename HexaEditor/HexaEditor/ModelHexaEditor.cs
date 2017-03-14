@@ -14,6 +14,13 @@ namespace HexaEditor
         //Contient les données entières du fichier
         private Reader fileReader;
         private bool isInit;
+        private Dictionary<string, string> fileInfos;
+
+        public Dictionary<string, string> FileInfos
+        {
+            get { return fileInfos; }
+            set { fileInfos = value; }
+        }
         public bool IsInit
         {
             get { return isInit; }
@@ -36,6 +43,7 @@ namespace HexaEditor
                 page--;
             }
         }
+
         private const ulong PAGECAPACITY = 16 * 32;
         private List<Rectangle> cases = new List<Rectangle>();
         private List<Rectangle> casesASCII = new List<Rectangle>();
@@ -59,6 +67,15 @@ namespace HexaEditor
         {
             this.fileReader = new Reader(path);
             this.IsInit = true;
+            this.fileInfos = new Dictionary<string, string>();
+            getFileInfos();
+        }
+        private void getFileInfos()
+        {
+            this.fileInfos.Add("Name", this.fileReader.getShortName());
+            this.fileInfos.Add("CreationDate", this.fileReader.getCreationDate());
+            this.fileInfos.Add("ModificationDate", this.fileReader.getLastModDate());
+            this.fileInfos.Add("Length", this.fileReader.getFileLength());
         }
 
         /// <summary>
@@ -321,6 +338,61 @@ namespace HexaEditor
             }
             return DrawArea;
         }
+
+
+        /// Retourne la valeur d'un entier signé de 64 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getInt64(ulong position)
+        {
+            return ((long)(fileReader.GetValue(position) * 72057594037927936)).ToString();
+        }
+        /// <summary>
+        /// Retourne la valeur binaire
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getBinary(ulong position)
+        {
+            return Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+        }
+        /// <summary>
+        /// Retourne la valeur d'un décimal sur 32 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getFloat(ulong position)
+        {
+            return string.Empty;
+        }
+        /// <summary>
+        /// Retourne la valeur d'un décimal sur 64 bits
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getDouble(ulong position)
+        {
+            byte[] c = new byte[8];
+            c[0] = fileReader.GetValue(position);
+            for (int i = 1; i < c.Length; i++)
+            {
+                c[i] = 0;
+            }
+            double d = BitConverter.ToDouble(c, 0);
+            return d.ToString();
+        }
+        /// <summary>
+        /// Retourne le caractère correspondant au code ASCII donnéS
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public char getASCII(ulong position)
+        {
+            return (char)fileReader.GetValue(position);
+        }
+
+
         public Bitmap generateDrawnValuesAsAscii(string[] values, int imageWidth, int imageHeight)
         {
             Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);

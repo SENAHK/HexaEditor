@@ -141,7 +141,10 @@ namespace HexaEditor
             return InfoFile.Name;
         }
 
-
+        public string getFileLength()
+        {
+            return InfoFile.Length.ToString();
+        }
 
         ///  DATA CONVERTING FUNCTIONS  \\\
 

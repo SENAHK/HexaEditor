@@ -59,22 +59,22 @@
             // 
             // pbxOutput
             // 
+            this.pbxOutput.BackColor = System.Drawing.Color.White;
             this.pbxOutput.Location = new System.Drawing.Point(246, 44);
             this.pbxOutput.Name = "pbxOutput";
             this.pbxOutput.Size = new System.Drawing.Size(463, 435);
             this.pbxOutput.TabIndex = 0;
             this.pbxOutput.TabStop = false;
-            this.pbxOutput.Click += new System.EventHandler(this.pbxOutput_Click);
             this.pbxOutput.Paint += new System.Windows.Forms.PaintEventHandler(this.pbxOutput_Paint);
             // 
             // pbxAscii
             // 
+            this.pbxAscii.BackColor = System.Drawing.Color.White;
             this.pbxAscii.Location = new System.Drawing.Point(733, 44);
             this.pbxAscii.Name = "pbxAscii";
             this.pbxAscii.Size = new System.Drawing.Size(313, 435);
             this.pbxAscii.TabIndex = 1;
             this.pbxAscii.TabStop = false;
-            this.pbxAscii.Click += new System.EventHandler(this.pbxAscii_Click);
             this.pbxAscii.Paint += new System.Windows.Forms.PaintEventHandler(this.pbxAscii_Paint);
             // 
             // label1
@@ -94,7 +94,6 @@
             this.lblHexa.Size = new System.Drawing.Size(102, 13);
             this.lblHexa.TabIndex = 3;
             this.lblHexa.Text = "Hexadecimal values";
-            this.lblHexa.Click += new System.EventHandler(this.lblHexa_Click);
             // 
             // lblAscii
             // 
@@ -104,7 +103,6 @@
             this.lblAscii.Size = new System.Drawing.Size(68, 13);
             this.lblAscii.TabIndex = 4;
             this.lblAscii.Text = "ASCII values";
-            this.lblAscii.Click += new System.EventHandler(this.lblAscii_Click);
             // 
             // tbcData
             // 
@@ -193,7 +191,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 134);
+            this.lblFileName.Location = new System.Drawing.Point(111, 17);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(94, 13);
             this.label5.TabIndex = 3;
@@ -257,7 +255,7 @@
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(115, 22);
             this.tsmiOpen.Text = "Open ...";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 

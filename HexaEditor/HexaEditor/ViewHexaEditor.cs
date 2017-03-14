@@ -62,11 +62,10 @@ namespace HexaEditor
 
         public void RefreshOutput()
         {
-            // Values to show (page)
-            string[] values = Model.getPageContent();
+            RefreshLabels();
 
             // Show in the picturebox
-            pbxOutput.Image = Model.GenerateDrawnValues(values, pbxOutput.Width, pbxOutput.Height);
+            pbxOutput.Image = Model.GenerateDrawnValues(Model.getPageContent(), pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
 
 
@@ -157,27 +156,18 @@ namespace HexaEditor
             pbxAscii.Invalidate();
         }
 
-
-
-        private void lblAscii_Click(object sender, EventArgs e)
+        public void RefreshLabels()
         {
-
+            lblFileName.Text = Model.FileInfos["Name"];
+            lblFileSize.Text = Model.FileInfos["Length"];
+            lblCreationDate.Text = Model.FileInfos["CreationDate"];
+            lblModificationDate.Text = Model.FileInfos["ModificationDate"];
         }
 
-        private void lblHexa_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void pbxAscii_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void pbxOutput_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
