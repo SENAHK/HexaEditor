@@ -176,6 +176,16 @@ namespace HexaEditor
 
         }
 
+        private void tsmiOpen_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = ofdOpenFile.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                this.Model.initReader(ofdOpenFile.FileName);
+                RefreshOutput();
+            }
+        }
+
 
 
 

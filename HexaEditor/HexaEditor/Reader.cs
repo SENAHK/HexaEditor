@@ -97,6 +97,10 @@ namespace HexaEditor
                 return false;
             }
         }
+        public void writeData()
+        {
+
+        }
 
 
 
