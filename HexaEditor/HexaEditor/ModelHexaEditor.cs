@@ -12,6 +12,13 @@ namespace HexaEditor
     {
         //Contient les données entières du fichier
         private Reader fileReader;
+        private bool isInit = false;
+
+        public bool IsInit
+        {
+            get { return isInit; }
+            set { isInit = value; }
+        }
         private ulong page = 0;
         public void nextPage()
         {
@@ -51,6 +58,7 @@ namespace HexaEditor
         public void initReader(string path)
         {
             this.fileReader = new Reader(path);
+            this.IsInit = true;
         }
 
         /// <summary>

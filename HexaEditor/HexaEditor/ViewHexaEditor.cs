@@ -43,21 +43,24 @@ namespace HexaEditor
 
         void ViewHexaEditor_MouseWheel(object sender, MouseEventArgs e)
         {
-            // Down
-            if (e.Delta < 0)
+            if (this.Model.IsInit)
             {
-                this.Model.nextPage();
+                // Down
+                if (e.Delta < 0)
+                {
+                    this.Model.nextPage();
+                }
+                else
+                {
+                    this.Model.previousPage();
+                }
+                RefreshOutput();
             }
-            else
-            {
-                this.Model.previousPage();
-            }
-            RefreshOutput();
         }
 
         private void ViewHexaEditor_Load(object sender, EventArgs e)
         {
-            RefreshOutput();
+            //RefreshOutput();
         }
 
         public void RefreshOutput()
@@ -69,7 +72,7 @@ namespace HexaEditor
             pbxOutput.Image = Model.GenerateDrawnValues(values, pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
 
-            // 
+
             pbxAscii.Image = Model.generateDrawnValuesAsAscii(Model.getASCIIpage(), pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
         }
