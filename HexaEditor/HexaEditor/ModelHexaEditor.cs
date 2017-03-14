@@ -247,6 +247,15 @@ namespace HexaEditor
         {
             return (char)fileReader.GetValue(position);
         }
+        /// <summary>
+        /// Retourne en base huit la valeur de l'indexe donné sous forme de string
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public string getOctal(ulong position)
+        {
+            return Convert.ToString(fileReader.GetValue(position), 8);
+        }
 
         /// <summary>
         /// Création d'une image bitmap contenant les valeurs passé en paramètres
