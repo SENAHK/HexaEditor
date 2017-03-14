@@ -260,7 +260,14 @@ namespace HexaEditor
         /// <returns></returns>
         public string getDouble(ulong position)
         {
-            return string.Empty;
+            byte[] c = new byte[8];
+            c[0] = fileReader.GetValue(position);
+            for (int i = 1; i < c.Length; i++)
+            {
+                c[i] = 0;
+            }
+            double d = BitConverter.ToDouble(c, 0);
+            return d.ToString();
         }
         /// <summary>
         /// Retourne le caractère correspondant au code ASCII donnéS
