@@ -89,7 +89,15 @@ namespace HexaEditor
 
             for (ulong i = start; i < stop; i++)
             {
-                ASCIIpage[count] = this.getASCII(i).ToString();
+                char c = this.getASCII(i);
+                if (c == (char)0)
+                {
+                    ASCIIpage[count] = ".";
+                }
+                else
+                {
+                    ASCIIpage[count] = c.ToString();
+                }
 
                 count++;
             }
@@ -286,11 +294,11 @@ namespace HexaEditor
             {
                 for (int x = 0; x < valuesX; x++)
                 {
-
+                    output = values[y * 16 + x];
                     // Valeurs à afficher
-                    int key = y * 16 + x;
-                    char chr = getASCII((ulong)key);
-                    output = (chr != (char)0) ? chr.ToString() : '.'.ToString();
+                    //int key = y * 16 + x;
+                    //char chr = getASCII((ulong)key);
+                    //output = (chr != (char)0) ? chr.ToString() : '.'.ToString();
 
                     Rectangle rect = new Rectangle(x * width, y * height, width, height + 1);
                     this.CasesASCII.Add(rect);

@@ -69,8 +69,8 @@ namespace HexaEditor
             pbxOutput.Image = Model.GenerateDrawnValues(values, pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
 
-            // ADasdfjaosfjassofj MODIFIER ICI TODODODODOD asdasd
-            pbxAscii.Image = Model.generateDrawnValuesAsAscii(values, pbxAscii.Width, pbxAscii.Height);
+            // 
+            pbxAscii.Image = Model.generateDrawnValuesAsAscii(Model.getASCIIpage(), pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
         }
 
@@ -149,6 +149,28 @@ namespace HexaEditor
             // Refresh pbx
             pbxOutput.Invalidate();
             pbxAscii.Invalidate();
+        }
+
+
+
+        private void lblAscii_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblHexa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbxAscii_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbxOutput_Click(object sender, EventArgs e)
+        {
+
         }
 
 
