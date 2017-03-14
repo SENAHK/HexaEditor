@@ -34,10 +34,7 @@ namespace HexaEditor
         {
             InitializeComponent();
             Model = new ModelHexaEditor();
-
-            // File to read
-            Model.initReader(@"C:\Users\ramusim_info\Desktop\sample.dll");
-
+            
             this.MouseWheel += ViewHexaEditor_MouseWheel;
         }
 
@@ -84,7 +81,10 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxOutput_Paint(object sender, PaintEventArgs e)
         {
-            selectCase(this.Model.Cases, Model.getPageContent(), e);
+            if (Model.IsInit)
+            {
+                selectCase(this.Model.Cases, Model.getPageContent(), e);
+            }
         }
 
         /// <summary>
@@ -99,7 +99,10 @@ namespace HexaEditor
             //{
             //    values[i] = Model.getASCII((ulong)i).ToString();
             //}
-            selectCase(this.Model.CasesASCII, Model.getASCIIpage(), e);
+            if (Model.IsInit)
+            {
+                selectCase(this.Model.CasesASCII, Model.getASCIIpage(), e);
+            }
         }
 
         /// <summary>
@@ -185,10 +188,5 @@ namespace HexaEditor
                 RefreshOutput();
             }
         }
-
-
-
-
-
     }
 }

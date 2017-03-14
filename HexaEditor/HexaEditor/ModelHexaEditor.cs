@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,7 @@ namespace HexaEditor
     {
         //Contient les données entières du fichier
         private Reader fileReader;
-        private bool isInit = false;
-
+        private bool isInit;
         public bool IsInit
         {
             get { return isInit; }
@@ -36,7 +36,6 @@ namespace HexaEditor
                 page--;
             }
         }
-
         private const ulong PAGECAPACITY = 16 * 32;
         private List<Rectangle> cases = new List<Rectangle>();
         private List<Rectangle> casesASCII = new List<Rectangle>();
@@ -53,6 +52,7 @@ namespace HexaEditor
         }
         public ModelHexaEditor()
         {
+            this.IsInit = false;
         }
 
         public void initReader(string path)
