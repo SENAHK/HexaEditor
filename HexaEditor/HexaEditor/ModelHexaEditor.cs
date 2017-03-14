@@ -69,7 +69,15 @@ namespace HexaEditor
         {
             string[] values = new string[PAGECAPACITY];
             ulong start = PAGECAPACITY * page;
-            ulong stop = start + PAGECAPACITY;
+            ulong stop;
+            if (start + PAGECAPACITY < fileReader.Length)
+            {
+                stop = start + PAGECAPACITY;
+            }
+            else
+            {
+                stop = fileReader.Length-1;
+            }
             int count = 0;
 
 
@@ -91,7 +99,15 @@ namespace HexaEditor
         {
             string[] ASCIIpage = new string[PAGECAPACITY];
             ulong start = PAGECAPACITY * page;
-            ulong stop = start + PAGECAPACITY;
+            ulong stop;
+            if (start + PAGECAPACITY < fileReader.Length)
+            {
+                stop = start + PAGECAPACITY;
+            }
+            else
+            {
+                stop = fileReader.Length - 1;
+            }
             int count = 0;
 
 
@@ -166,75 +182,6 @@ namespace HexaEditor
             string binary32 = binary + "00000000" + "00000000" + "00000000";
             return (Convert.ToInt32(binary32, 2)).ToString();
         }
-        
-
-
-        /// <summary>
-        /// Création d'une image bitmap contenant les valeurs passé en paramètres
-        /// </summary>
-        /// <param name="values">Tableau de string de valeurs</param>
-        /// <param name="imageWidth">Largeur de l'image</param>
-        /// <param name="imageHeight">Hauteur de l'image</param>
-        /// <returns></returns>
-        public Bitmap GenerateDrawnValues(string[] values, int imageWidth, int imageHeight)
-        {
-            Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);
-            Graphics g = Graphics.FromImage(DrawArea);
-
-            // Largeur du tableau fixe à 16
-            int valuesX = 16;
-            // Hauteur du tableau: si plus grand que 16 (càd une ligne), divisé par 16
-            int valuesY = values.Length > 16 ? values.Length / 16 : 1;
-
-            // Largeur et hauteur des rectangles
-            int width = imageWidth / valuesX;
-            int height = imageHeight / valuesY;
-
-            string output = "";
-
-            for (int y = -1; y < valuesY; y++)
-            {
-                for (int x = -1; x < valuesX; x++)
-                {
-                    // En-tête de colonnes
-                    if (y < 0)
-                    {
-                        if (x < 0)
-                            output = "";
-                        else
-                            output = Convert.ToString(x, 16).ToUpper();
-                    }
-                    else
-                    {
-                        // Titres de lignes
-                        if (x < 0)
-                        {                   
-                            output = Convert.ToString(y + (int)page * 32, 16).ToUpper();
-                        }
-                        else
-                        {
-                            // Valeurs à afficher
-                            output = values[y * 16 + x];
-                        }
-
-                        string magie = Convert.ToString(154, 16);
-
-                    }
-
-                    Rectangle rect = new Rectangle((x + 1) * width, (y + 1) * height, width, height + 1);
-
-                    if (y >= 0 && x >= 0)
-                        this.Cases.Add(rect);
-
-                    // Afficher les éléments du tableau dans une surface de dessin
-                    Brush brush = ((x < 0) || (y < 0)) ? Brushes.Blue : Brushes.Black;
-                    g.DrawString(output, new Font("Tahoma", 8), brush, rect);
-                }
-            }
-            return DrawArea;
-        }
-
-
         /// Retourne la valeur d'un entier signé de 64 bits
         /// </summary>
         /// <param name="position"></param>
@@ -287,7 +234,70 @@ namespace HexaEditor
             return (char)fileReader.GetValue(position);
         }
 
+        /// <summary>
+        /// Création d'une image bitmap contenant les valeurs passé en paramètres
+        /// </summary>
+        /// <param name="values">Tableau de string de valeurs</param>
+        /// <param name="imageWidth">Largeur de l'image</param>
+        /// <param name="imageHeight">Hauteur de l'image</param>
+        /// <returns></returns>
+        public Bitmap GenerateDrawnValues(string[] values, int imageWidth, int imageHeight)
+        {
+            Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);
+            Graphics g = Graphics.FromImage(DrawArea);
 
+            // Largeur du tableau fixe à 16
+            int valuesX = 16;
+            // Hauteur du tableau: si plus grand que 16 (càd une ligne), divisé par 16
+            int valuesY = values.Length > 16 ? values.Length / 16 : 1;
+
+            // Largeur et hauteur des rectangles
+            int width = imageWidth / valuesX;
+            int height = imageHeight / valuesY;
+
+            string output = "";
+
+            for (int y = -1; y < valuesY; y++)
+            {
+                for (int x = -1; x < valuesX; x++)
+                {
+                    // En-tête de colonnes
+                    if (y < 0)
+                    {
+                        if (x < 0)
+                            output = "";
+                        else
+                            output = Convert.ToString(x, 16).ToUpper();
+                    }
+                    else
+                    {
+                        // Titres de lignes
+                        if (x < 0)
+                        {
+                            output = Convert.ToString(y + (int)page * 32, 16).ToUpper();
+                        }
+                        else
+                        {
+                            // Valeurs à afficher
+                            output = values[y * 16 + x];
+                        }
+
+                        string magie = Convert.ToString(154, 16);
+
+                    }
+
+                    Rectangle rect = new Rectangle((x + 1) * width, (y + 1) * height, width, height + 1);
+
+                    if (y >= 0 && x >= 0)
+                        this.Cases.Add(rect);
+
+                    // Afficher les éléments du tableau dans une surface de dessin
+                    Brush brush = ((x < 0) || (y < 0)) ? Brushes.Blue : Brushes.Black;
+                    g.DrawString(output, new Font("Tahoma", 8), brush, rect);
+                }
+            }
+            return DrawArea;
+        }
         public Bitmap generateDrawnValuesAsAscii(string[] values, int imageWidth, int imageHeight)
         {
             Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);
