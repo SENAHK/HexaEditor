@@ -61,8 +61,7 @@ namespace HexaEditor
 
         public void RefreshOutput()
         {
-            // Values to show (page)
-            string[] values = Model.getPageContent();
+            RefreshLabels();
 
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(Model.getPageContent(), pbxOutput.Width, pbxOutput.Height);
@@ -159,6 +158,7 @@ namespace HexaEditor
             pbxAscii.Invalidate();
         }
 
+<<<<<<< HEAD
         public void RefreshLabels()
         {
             lblFileName.Text = Model.FileInfos["Name"];
@@ -166,6 +166,7 @@ namespace HexaEditor
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
+
             lblChar.Text = Model.getASCII((ulong)SelectedCase).ToString();
             lblBin.Text = Model.getBinary((ulong)SelectedCase);
             lblOctal.Text = Model.getOctal((ulong)SelectedCase);
@@ -181,6 +182,13 @@ namespace HexaEditor
 
         }
 
+=======
+        /// <summary>
+        /// Open dans le menu, commande l'openfileDialog menant à l'ouverture d'un fichier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+>>>>>>> Futilités (enlever les event sur les label)
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
             DialogResult dr = ofdOpenFile.ShowDialog();
