@@ -16,6 +16,7 @@ namespace HexaEditor
         private int _selectedCase = 0;
         private const int ARRAY_WIDTH = 16;
         private ulong page = 0;
+        private bool focus = true; //true => Focus pbhexa | false => Focus phASCII
         public int SelectedCase
         {
             get { return _selectedCase; }
@@ -27,8 +28,6 @@ namespace HexaEditor
             get { return _model; }
             set { _model = value; }
         }
-
-
 
         public ViewHexaEditor()
         {
@@ -62,7 +61,8 @@ namespace HexaEditor
 
         public void RefreshOutput()
         {
-            RefreshLabels();
+            // Values to show (page)
+            string[] values = Model.getPageContent();
 
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(Model.getPageContent(), pbxOutput.Width, pbxOutput.Height);
@@ -160,13 +160,11 @@ namespace HexaEditor
         }
 
         public void RefreshLabels()
-        {
             lblFileName.Text = Model.FileInfos["Name"];
             lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
-
             lblChar.Text = Model.getASCII((ulong)SelectedCase).ToString();
             lblBin.Text = Model.getBinary((ulong)SelectedCase);
             lblOctal.Text = Model.getOctal((ulong)SelectedCase);
