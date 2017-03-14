@@ -72,10 +72,11 @@ namespace HexaEditor
         }
         private void getFileInfos()
         {
-            this.fileInfos.Add("Name", this.fileReader.getShortName());
-            this.fileInfos.Add("CreationDate", this.fileReader.getCreationDate());
-            this.fileInfos.Add("ModificationDate", this.fileReader.getLastModDate());
-            this.fileInfos.Add("Length", this.fileReader.getFileLength());
+            this.FileInfos.Add("Name", this.fileReader.getShortName());
+            this.FileInfos.Add("CreationDate", this.fileReader.getCreationDate());
+            this.FileInfos.Add("ModificationDate", this.fileReader.getLastModDate());
+            this.FileInfos.Add("Length", this.fileReader.getFileLength());
+            this.FileInfos.Add("LastAccess", this.fileReader.getLastAccess());
         }
 
         /// <summary>
@@ -340,57 +341,6 @@ namespace HexaEditor
         }
 
 
-        /// Retourne la valeur d'un entier signé de 64 bits
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        public string getInt64(ulong position)
-        {
-            return ((long)(fileReader.GetValue(position) * 72057594037927936)).ToString();
-        }
-        /// <summary>
-        /// Retourne la valeur binaire
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        public string getBinary(ulong position)
-        {
-            return Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
-        }
-        /// <summary>
-        /// Retourne la valeur d'un décimal sur 32 bits
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        public string getFloat(ulong position)
-        {
-            return string.Empty;
-        }
-        /// <summary>
-        /// Retourne la valeur d'un décimal sur 64 bits
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        public string getDouble(ulong position)
-        {
-            byte[] c = new byte[8];
-            c[0] = fileReader.GetValue(position);
-            for (int i = 1; i < c.Length; i++)
-            {
-                c[i] = 0;
-            }
-            double d = BitConverter.ToDouble(c, 0);
-            return d.ToString();
-        }
-        /// <summary>
-        /// Retourne le caractère correspondant au code ASCII donnéS
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        public char getASCII(ulong position)
-        {
-            return (char)fileReader.GetValue(position);
-        }
 
 
         public Bitmap generateDrawnValuesAsAscii(string[] values, int imageWidth, int imageHeight)

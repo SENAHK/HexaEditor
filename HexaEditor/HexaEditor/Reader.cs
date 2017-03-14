@@ -129,6 +129,11 @@ namespace HexaEditor
             return InfoFile.LastWriteTime.ToString();
         }
 
+        public string getLastAccess()
+        {
+            return InfoFile.LastAccessTime.ToString();
+        }
+        
         //Donne la date de création du fichier
         public string getCreationDate()
         {

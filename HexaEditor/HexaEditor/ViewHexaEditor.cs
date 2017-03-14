@@ -71,6 +71,8 @@ namespace HexaEditor
 
             pbxAscii.Image = Model.generateDrawnValuesAsAscii(Model.getASCIIpage(), pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
+
+            
         }
 
         /// <summary>
@@ -151,6 +153,7 @@ namespace HexaEditor
             {
                 SelectedCase = t_selectedCase;
             }
+            RefreshLabels();
             // Refresh pbx
             pbxOutput.Invalidate();
             pbxAscii.Invalidate();
@@ -159,15 +162,25 @@ namespace HexaEditor
         public void RefreshLabels()
         {
             lblFileName.Text = Model.FileInfos["Name"];
-            lblFileSize.Text = Model.FileInfos["Length"];
+            lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
+            lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
+
+            lblChar.Text = Model.getASCII((ulong)SelectedCase).ToString();
+            lblBin.Text = Model.getBinary((ulong)SelectedCase);
+            //lblOctal.Text = Model.get((ulong)SelectedCase);
+            lbl8s.Text = Model.getSByte((ulong)SelectedCase);
+            lbl8ns.Text = Model.getByte((ulong)SelectedCase);
+            lbl16s.Text = Model.getInt16((ulong)SelectedCase);
+            lbl16ns.Text = Model.getUint16((ulong)SelectedCase);
+            lbl32s.Text = Model.getInt32((ulong)SelectedCase);
+            //lbl32ns.Text = Model.get((ulong)SelectedCase);
+            lbl64.Text = Model.getInt64((ulong)SelectedCase);
+            lblDouble.Text = Model.getDouble((ulong)SelectedCase);
+            lblFloat.Text = Model.getFloat((ulong)SelectedCase);
+
         }
-
-
-
-
-
 
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
@@ -178,5 +191,17 @@ namespace HexaEditor
                 RefreshOutput();
             }
         }
+
+        private void tbcData_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Remove the default behaviour that allows navigating in the tabs with the arrow keys
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+                e.Handled = true;
+            // 
+            ViewHexaEditor_KeyDown(sender, e);
+        }
+
+
+
     }
 }
