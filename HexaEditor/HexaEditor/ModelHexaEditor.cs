@@ -76,7 +76,7 @@ namespace HexaEditor
             }
             else
             {
-                stop = fileReader.Length-1;
+                stop = fileReader.Length;
             }
             int count = 0;
 
@@ -106,7 +106,7 @@ namespace HexaEditor
             }
             else
             {
-                stop = fileReader.Length - 1;
+                stop = fileReader.Length;
             }
             int count = 0;
 
@@ -127,6 +127,20 @@ namespace HexaEditor
             }
 
             return ASCIIpage;
+        }
+        public void setPage(string[] hexaValues)
+        {
+            byte[] values = new byte[hexaValues.Length];
+
+            //Reconverti chaque valeur hexadécimale en byte
+            for (int i = 0; i < values.Length; i++)
+            {
+                values[i] = Convert.ToByte(Convert.ToInt32(hexaValues[i], 16));
+            }
+
+            fileReader.updatePseudoPage(values, PAGECAPACITY * page);
+
+
         }
 
         /// CONVERTING FUNCTIONS \\\

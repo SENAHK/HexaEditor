@@ -11,7 +11,6 @@ namespace HexaEditor
     {
         /// PARAM  \\
 
-
         //Bytes contenu dans le ficher
         private byte[] _data;
         public byte[] Data
@@ -52,12 +51,8 @@ namespace HexaEditor
             set { _path = value; }
         }
 
-
-
-
         ///  CONSTRUCTOR & CONSTRUCTION RELATED FUNCTIONS  \\\
-
-
+        
         public Reader(string paramPath)
         {
             this.Path = paramPath;
@@ -97,12 +92,33 @@ namespace HexaEditor
                 return false;
             }
         }
+        /// <summary>
+        /// PAS TESTE
+        /// Réecris les informations dans le fichier ouvert, en se basant sur la variable data
+        /// </summary>
         public void writeData()
         {
-
+            using (BinaryWriter writer = new BinaryWriter(File.Open(this.getShortName(), FileMode.Truncate)))
+            {
+                writer.Write(this.Data);
+            }
         }
-
-
+        /// <summary>
+        /// PAS TESTE
+        /// Met a jour une parcelle de data, correspondant dans la vue à une page
+        /// </summary>
+        /// <param name="values">tableau contenant les valeur de la page présente sur la form</param>
+        /// <param name="startID">Index correspondant à la première entrée de value dans la référence Data</param>
+        public void updatePseudoPage(byte[] values, ulong startID)
+        {
+            ulong length = startID + (ulong)values.Length;
+            int count = 0;
+            for (ulong i = startID; i < length; i++)
+            {
+                this.Data[i] = values[count];
+                count++;
+            }
+        }
 
         /// FILE INFO FUNCTIONS \\\
 
