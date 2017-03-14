@@ -46,6 +46,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbDataReader = new System.Windows.Forms.TabPage();
+            this.label29 = new System.Windows.Forms.Label();
+            this.lblDouble = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lblFloat = new System.Windows.Forms.Label();
+            this.lbl64 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lbl32ns = new System.Windows.Forms.Label();
+            this.lbl32s = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lbl16ns = new System.Windows.Forms.Label();
+            this.lbl16s = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.lbl8ns = new System.Windows.Forms.Label();
             this.lbl8s = new System.Windows.Forms.Label();
             this.lblOctal = new System.Windows.Forms.Label();
@@ -59,21 +74,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.lbl16ns = new System.Windows.Forms.Label();
-            this.lbl16s = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.lbl32ns = new System.Windows.Forms.Label();
-            this.lbl32s = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lblFloat = new System.Windows.Forms.Label();
-            this.lbl64 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.lblDouble = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOutput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAscii)).BeginInit();
             this.tbcData.SuspendLayout();
@@ -287,10 +287,145 @@
             this.tbDataReader.Text = "Data";
             this.tbDataReader.UseVisualStyleBackColor = true;
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(6, 342);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(47, 13);
+            this.label29.TabIndex = 34;
+            this.label29.Text = "Double :";
+            // 
+            // lblDouble
+            // 
+            this.lblDouble.AutoSize = true;
+            this.lblDouble.Location = new System.Drawing.Point(76, 342);
+            this.lblDouble.Name = "lblDouble";
+            this.lblDouble.Size = new System.Drawing.Size(10, 13);
+            this.lblDouble.TabIndex = 33;
+            this.lblDouble.Text = "-";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(6, 312);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(36, 13);
+            this.label25.TabIndex = 32;
+            this.label25.Text = "Float :";
+            // 
+            // lblFloat
+            // 
+            this.lblFloat.AutoSize = true;
+            this.lblFloat.Location = new System.Drawing.Point(76, 312);
+            this.lblFloat.Name = "lblFloat";
+            this.lblFloat.Size = new System.Drawing.Size(10, 13);
+            this.lblFloat.TabIndex = 31;
+            this.lblFloat.Text = "-";
+            // 
+            // lbl64
+            // 
+            this.lbl64.AutoSize = true;
+            this.lbl64.Location = new System.Drawing.Point(76, 282);
+            this.lbl64.Name = "lbl64";
+            this.lbl64.Size = new System.Drawing.Size(10, 13);
+            this.lbl64.TabIndex = 30;
+            this.lbl64.Text = "-";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(6, 282);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(58, 13);
+            this.label28.TabIndex = 29;
+            this.label28.Text = "64 bits (s) :";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 252);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(64, 13);
+            this.label21.TabIndex = 28;
+            this.label21.Text = "32 bits (ns) :";
+            // 
+            // lbl32ns
+            // 
+            this.lbl32ns.AutoSize = true;
+            this.lbl32ns.Location = new System.Drawing.Point(76, 252);
+            this.lbl32ns.Name = "lbl32ns";
+            this.lbl32ns.Size = new System.Drawing.Size(10, 13);
+            this.lbl32ns.TabIndex = 27;
+            this.lbl32ns.Text = "-";
+            // 
+            // lbl32s
+            // 
+            this.lbl32s.AutoSize = true;
+            this.lbl32s.Location = new System.Drawing.Point(76, 222);
+            this.lbl32s.Name = "lbl32s";
+            this.lbl32s.Size = new System.Drawing.Size(10, 13);
+            this.lbl32s.TabIndex = 26;
+            this.lbl32s.Text = "-";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 222);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(58, 13);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "32 bits (s) :";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 192);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(64, 13);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "16 bits (ns) :";
+            // 
+            // lbl16ns
+            // 
+            this.lbl16ns.AutoSize = true;
+            this.lbl16ns.Location = new System.Drawing.Point(76, 192);
+            this.lbl16ns.Name = "lbl16ns";
+            this.lbl16ns.Size = new System.Drawing.Size(10, 13);
+            this.lbl16ns.TabIndex = 23;
+            this.lbl16ns.Text = "-";
+            // 
+            // lbl16s
+            // 
+            this.lbl16s.AutoSize = true;
+            this.lbl16s.Location = new System.Drawing.Point(76, 162);
+            this.lbl16s.Name = "lbl16s";
+            this.lbl16s.Size = new System.Drawing.Size(10, 13);
+            this.lbl16s.TabIndex = 22;
+            this.lbl16s.Text = "-";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 162);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(58, 13);
+            this.label20.TabIndex = 21;
+            this.label20.Text = "16 bits (s) :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 132);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(58, 13);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "8 bits (ns) :";
+            // 
             // lbl8ns
             // 
             this.lbl8ns.AutoSize = true;
-            this.lbl8ns.Location = new System.Drawing.Point(113, 132);
+            this.lbl8ns.Location = new System.Drawing.Point(76, 132);
             this.lbl8ns.Name = "lbl8ns";
             this.lbl8ns.Size = new System.Drawing.Size(10, 13);
             this.lbl8ns.TabIndex = 19;
@@ -299,7 +434,7 @@
             // lbl8s
             // 
             this.lbl8s.AutoSize = true;
-            this.lbl8s.Location = new System.Drawing.Point(113, 102);
+            this.lbl8s.Location = new System.Drawing.Point(76, 102);
             this.lbl8s.Name = "lbl8s";
             this.lbl8s.Size = new System.Drawing.Size(10, 13);
             this.lbl8s.TabIndex = 18;
@@ -308,7 +443,7 @@
             // lblOctal
             // 
             this.lblOctal.AutoSize = true;
-            this.lblOctal.Location = new System.Drawing.Point(113, 72);
+            this.lblOctal.Location = new System.Drawing.Point(76, 72);
             this.lblOctal.Name = "lblOctal";
             this.lblOctal.Size = new System.Drawing.Size(10, 13);
             this.lblOctal.TabIndex = 17;
@@ -317,7 +452,7 @@
             // lblBin
             // 
             this.lblBin.AutoSize = true;
-            this.lblBin.Location = new System.Drawing.Point(113, 42);
+            this.lblBin.Location = new System.Drawing.Point(76, 42);
             this.lblBin.Name = "lblBin";
             this.lblBin.Size = new System.Drawing.Size(10, 13);
             this.lblBin.TabIndex = 16;
@@ -326,7 +461,7 @@
             // lblChar
             // 
             this.lblChar.AutoSize = true;
-            this.lblChar.Location = new System.Drawing.Point(113, 12);
+            this.lblChar.Location = new System.Drawing.Point(76, 12);
             this.lblChar.Name = "lblChar";
             this.lblChar.Size = new System.Drawing.Size(10, 13);
             this.lblChar.TabIndex = 15;
@@ -397,141 +532,6 @@
             // ofdOpenFile
             // 
             this.ofdOpenFile.FileName = "openFileDialog1";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 132);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(58, 13);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "8 bits (ns) :";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 192);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 13);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "16 bits (ns) :";
-            // 
-            // lbl16ns
-            // 
-            this.lbl16ns.AutoSize = true;
-            this.lbl16ns.Location = new System.Drawing.Point(113, 192);
-            this.lbl16ns.Name = "lbl16ns";
-            this.lbl16ns.Size = new System.Drawing.Size(10, 13);
-            this.lbl16ns.TabIndex = 23;
-            this.lbl16ns.Text = "-";
-            // 
-            // lbl16s
-            // 
-            this.lbl16s.AutoSize = true;
-            this.lbl16s.Location = new System.Drawing.Point(113, 162);
-            this.lbl16s.Name = "lbl16s";
-            this.lbl16s.Size = new System.Drawing.Size(10, 13);
-            this.lbl16s.TabIndex = 22;
-            this.lbl16s.Text = "-";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 162);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(58, 13);
-            this.label20.TabIndex = 21;
-            this.label20.Text = "16 bits (s) :";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 252);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(64, 13);
-            this.label21.TabIndex = 28;
-            this.label21.Text = "32 bits (ns) :";
-            // 
-            // lbl32ns
-            // 
-            this.lbl32ns.AutoSize = true;
-            this.lbl32ns.Location = new System.Drawing.Point(113, 252);
-            this.lbl32ns.Name = "lbl32ns";
-            this.lbl32ns.Size = new System.Drawing.Size(10, 13);
-            this.lbl32ns.TabIndex = 27;
-            this.lbl32ns.Text = "-";
-            // 
-            // lbl32s
-            // 
-            this.lbl32s.AutoSize = true;
-            this.lbl32s.Location = new System.Drawing.Point(113, 222);
-            this.lbl32s.Name = "lbl32s";
-            this.lbl32s.Size = new System.Drawing.Size(10, 13);
-            this.lbl32s.TabIndex = 26;
-            this.lbl32s.Text = "-";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 222);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(58, 13);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "32 bits (s) :";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 312);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(36, 13);
-            this.label25.TabIndex = 32;
-            this.label25.Text = "Float :";
-            // 
-            // lblFloat
-            // 
-            this.lblFloat.AutoSize = true;
-            this.lblFloat.Location = new System.Drawing.Point(113, 312);
-            this.lblFloat.Name = "lblFloat";
-            this.lblFloat.Size = new System.Drawing.Size(10, 13);
-            this.lblFloat.TabIndex = 31;
-            this.lblFloat.Text = "-";
-            // 
-            // lbl64
-            // 
-            this.lbl64.AutoSize = true;
-            this.lbl64.Location = new System.Drawing.Point(113, 282);
-            this.lbl64.Name = "lbl64";
-            this.lbl64.Size = new System.Drawing.Size(10, 13);
-            this.lbl64.TabIndex = 30;
-            this.lbl64.Text = "-";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(6, 282);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(58, 13);
-            this.label28.TabIndex = 29;
-            this.label28.Text = "64 bits (s) :";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(6, 342);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(47, 13);
-            this.label29.TabIndex = 34;
-            this.label29.Text = "Double :";
-            // 
-            // lblDouble
-            // 
-            this.lblDouble.AutoSize = true;
-            this.lblDouble.Location = new System.Drawing.Point(113, 342);
-            this.lblDouble.Name = "lblDouble";
-            this.lblDouble.Size = new System.Drawing.Size(10, 13);
-            this.lblDouble.TabIndex = 33;
-            this.lblDouble.Text = "-";
             // 
             // ViewHexaEditor
             // 

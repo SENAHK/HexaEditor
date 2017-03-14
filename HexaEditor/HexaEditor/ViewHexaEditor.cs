@@ -169,7 +169,7 @@ namespace HexaEditor
 
             lblChar.Text = Model.getASCII((ulong)SelectedCase).ToString();
             lblBin.Text = Model.getBinary((ulong)SelectedCase);
-            //lblOctal.Text = Model.get((ulong)SelectedCase);
+            lblOctal.Text = Model.getOctal((ulong)SelectedCase);
             lbl8s.Text = Model.getSByte((ulong)SelectedCase);
             lbl8ns.Text = Model.getByte((ulong)SelectedCase);
             lbl16s.Text = Model.getInt16((ulong)SelectedCase);
