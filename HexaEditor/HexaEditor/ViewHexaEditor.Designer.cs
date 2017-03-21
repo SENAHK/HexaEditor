@@ -92,6 +92,7 @@
             this.pbxOutput.Size = new System.Drawing.Size(463, 435);
             this.pbxOutput.TabIndex = 0;
             this.pbxOutput.TabStop = false;
+            this.pbxOutput.Click += new System.EventHandler(this.pbxOutput_Click);
             this.pbxOutput.Paint += new System.Windows.Forms.PaintEventHandler(this.pbxOutput_Paint);
             // 
             // pbxAscii
@@ -103,6 +104,7 @@
             this.pbxAscii.Size = new System.Drawing.Size(313, 435);
             this.pbxAscii.TabIndex = 1;
             this.pbxAscii.TabStop = false;
+            this.pbxAscii.Click += new System.EventHandler(this.pbxAscii_Click);
             this.pbxAscii.Paint += new System.Windows.Forms.PaintEventHandler(this.pbxAscii_Paint);
             // 
             // label1
@@ -559,6 +561,7 @@
             this.Text = "Hexa File Editor";
             this.Load += new System.EventHandler(this.ViewHexaEditor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewHexaEditor_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ViewHexaEditor_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pbxOutput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAscii)).EndInit();
             this.tbcData.ResumeLayout(false);

@@ -10,13 +10,23 @@ using System.Windows.Forms;
 
 namespace HexaEditor
 {
+    /*
+     * BUG
+     * Il faut revoir la génération du tableau, car en réinjectant les donnnées dans le reader
+     * on le fait avec la taille du tableau. Il faudrait revoir la génération dans la textbox
+     * pour faire en sorte qu'elle conserve le ratio de largeur et de hauteur mais s'arrête à 
+     * la fin tu tableau (qu'on ne force pas à avoir la taille de la page)
+     * 
+     *  ++ J'ai besoin d'une variable avec la position du curseur pour modifier l'interieur des cases
+     */ 
+
     public partial class ViewHexaEditor : Form
     {
         private ModelHexaEditor _model;
         private int _selectedCase = 0;
         private const int ARRAY_WIDTH = 16;
         private ulong page = 0;
-        private bool focus = true; //true => Focus pbhexa | false => Focus phASCII
+        private bool focus = true; //true => Focus pbHexa | false => Focus pbASCII
 
         private string[] values;
         private string[] asciiValues;
@@ -41,6 +51,11 @@ namespace HexaEditor
             this.MouseWheel += ViewHexaEditor_MouseWheel;
         }
 
+        /// <summary>
+        /// Scroll => commande le changement de page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ViewHexaEditor_MouseWheel(object sender, MouseEventArgs e)
         {
             if (this.Model.IsInit)
@@ -54,22 +69,36 @@ namespace HexaEditor
                 {
                     this.Model.previousPage();
                 }
+                this.LoadPages();
                 RefreshOutput();
             }
         }
 
+        /// <summary>
+        /// Load de la form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewHexaEditor_Load(object sender, EventArgs e)
         {
             //RefreshOutput();
         }
 
-        public void RefreshOutput()
+        /// <summary>
+        /// Charge les pages référencée par le paramètre page du model
+        /// </summary>
+        public void LoadPages()
         {
             // Values to show (page)
             this.values = Model.getPageContent();
             this.asciiValues = Model.getASCIIpage();
-            
+        }
 
+        /// <summary>
+        /// Met à jour le contenu des tableaux en fonction du paramètre value
+        /// </summary>
+        public void RefreshOutput()
+        {
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(this.values, pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
@@ -77,7 +106,6 @@ namespace HexaEditor
 
             pbxAscii.Image = Model.generateDrawnValuesAsAscii(this.asciiValues, pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
-            
         }
 
         /// <summary>
@@ -87,8 +115,6 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxOutput_Paint(object sender, PaintEventArgs e)
         {
-            //this.values = Model.getPageContent();
-
             if (Model.IsInit)
             {
                 selectCase(this.Model.Cases, this.values, e);
@@ -102,8 +128,6 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxAscii_Paint(object sender, PaintEventArgs e)
         {
-            //this.asciiValues = Model.getASCIIpage();
-
             if (Model.IsInit)
             {
                 selectCase(this.Model.CasesASCII, this.asciiValues, e);
@@ -153,7 +177,7 @@ namespace HexaEditor
             }
 
             // If the cell is out of range
-            if (SelectedCase < 0 || SelectedCase > 511)
+            if (SelectedCase < 0 || SelectedCase > values.Length)
             {
                 SelectedCase = t_selectedCase;
             }
@@ -163,6 +187,9 @@ namespace HexaEditor
             pbxAscii.Invalidate();
         }
 
+        /// <summary>
+        /// Mets à jour les labels d'information
+        /// </summary>
         public void RefreshLabels()
         {
             lblFileName.Text = Model.FileInfos["Name"];
@@ -191,6 +218,7 @@ namespace HexaEditor
             if (dr == DialogResult.OK)
             {
                 this.Model.initReader(ofdOpenFile.FileName);
+                this.LoadPages();
                 RefreshOutput();
             }
         }
@@ -204,10 +232,103 @@ namespace HexaEditor
             ViewHexaEditor_KeyDown(sender, e);
         }
 
+        /// <summary>
+        /// Onglet save du menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsmiSave_Click(object sender, EventArgs e)
         {
             this.Model.setPage(this.values);
             this.Model.saveFIle();
+        }
+
+        /// <summary>
+        /// Click sur le tableau des Hexadécimaux => met le focus dessus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbxOutput_Click(object sender, EventArgs e)
+        {
+            this.focus = true;
+        }
+
+        /// <summary>
+        /// Cick sur le tableau des ascii  => met le focus dessus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbxAscii_Click(object sender, EventArgs e)
+        {
+            this.focus = false;
+        }
+
+        /// <summary>
+        /// Filtre les caractères en fonction du focus de l'utilisateur sur l'un des tableaux
+        /// Renvoie à l'une des fonctions d'écriture si les caractères sont valides
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ViewHexaEditor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (focus)
+            {
+                e.KeyChar = Convert.ToChar(e.ToString().ToUpper());
+                if (char.IsNumber(e.KeyChar) || e.KeyChar == 'A' || e.KeyChar == 'B' || e.KeyChar == 'C' || e.KeyChar == 'D' || e.KeyChar == 'F')
+                {
+                    WriteFromHexa(e.KeyChar);
+                }
+            }
+            else
+            {
+                WriteFromAscii(e.KeyChar);
+            }
+        }
+
+        /// <summary>
+        /// écris la valeur en l'état dans le tableau ascii et la convertit en hexadécimal pour l'écrire dans le tableau des hexa
+        /// </summary>
+        /// <param name="value">caractère ascii</param>
+        public void WriteFromAscii(char value)
+        {
+            int height = 1; //Temporaire
+            int width = 1; //Temporaire
+
+            int position = height * ARRAY_WIDTH + width;
+
+            this.asciiValues[position] = value.ToString();
+
+            string hexa = Convert.ToString(Convert.ToByte(value), 16);
+            this.values[position] = hexa;
+
+            RefreshOutput();
+        }
+        /// <summary>
+        /// écris la valeur en l'état, en concaténé ou en remplacement selon le nombre de caractères présents dans la case hexa
+        /// converti la valeur donnée par l'opération précédente en ascii pour l'écrire dans le tableau correspondant
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteFromHexa(char value)
+        {
+            int height = 1; //Temporaire
+            int width = 1; //Temporaire
+
+            int position = height * ARRAY_WIDTH + width;
+            string reff = this.values[position];
+
+            if (reff.Length == 1)
+            {
+                this.values[position] = reff + value;
+            }
+            else
+            {
+                this.values[position] = value.ToString();
+            }
+
+            byte numericVal = Convert.ToByte(Convert.ToInt32(this.values[position], 16));
+            this.asciiValues[position] = ((char)numericVal).ToString();
+
+            RefreshOutput();
         }
     }
 }

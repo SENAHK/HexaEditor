@@ -64,7 +64,6 @@ namespace HexaEditor
             }
             MessageBox.Show(this.Data.Length.ToString());   
         }
-
         /// <summary>
         /// Lis le contenu du fichier inidiqué par le paramètre Path. Les valeurs sont stoquées dans Data
         /// La fonction retourne un booléen en fonction de le réussite de la lecture.
