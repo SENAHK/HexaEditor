@@ -30,7 +30,6 @@
         {
             this.pbxOutput = new System.Windows.Forms.PictureBox();
             this.pbxAscii = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblHexa = new System.Windows.Forms.Label();
             this.lblAscii = new System.Windows.Forms.Label();
             this.tbcData = new System.Windows.Forms.TabControl();
@@ -40,36 +39,36 @@
             this.lblCreationDate = new System.Windows.Forms.Label();
             this.lblFileSize = new System.Windows.Forms.Label();
             this.lblFileName = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblTitleLastAccess = new System.Windows.Forms.Label();
+            this.lblTitleModDate = new System.Windows.Forms.Label();
+            this.lblTitleCreationDate = new System.Windows.Forms.Label();
+            this.lblTitleSize = new System.Windows.Forms.Label();
+            this.lblTitleName = new System.Windows.Forms.Label();
             this.tbDataReader = new System.Windows.Forms.TabPage();
-            this.label29 = new System.Windows.Forms.Label();
+            this.lblTitleDouble = new System.Windows.Forms.Label();
             this.lblDouble = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.lblTitleFloat = new System.Windows.Forms.Label();
             this.lblFloat = new System.Windows.Forms.Label();
             this.lbl64 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.lblTitleLong = new System.Windows.Forms.Label();
+            this.lblTitleUint32 = new System.Windows.Forms.Label();
             this.lbl32ns = new System.Windows.Forms.Label();
             this.lbl32s = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblTitleInt32 = new System.Windows.Forms.Label();
+            this.lblTitleUint16 = new System.Windows.Forms.Label();
             this.lbl16ns = new System.Windows.Forms.Label();
             this.lbl16s = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblTitleInt16 = new System.Windows.Forms.Label();
+            this.lblTitleSByte = new System.Windows.Forms.Label();
             this.lbl8ns = new System.Windows.Forms.Label();
             this.lbl8s = new System.Windows.Forms.Label();
             this.lblOctal = new System.Windows.Forms.Label();
             this.lblBin = new System.Windows.Forms.Label();
             this.lblChar = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblTitbleByte = new System.Windows.Forms.Label();
+            this.lblTitleOctal = new System.Windows.Forms.Label();
+            this.LblTitleBinary = new System.Windows.Forms.Label();
+            this.lblTitleChar = new System.Windows.Forms.Label();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,15 +105,6 @@
             this.pbxAscii.TabStop = false;
             this.pbxAscii.Click += new System.EventHandler(this.pbxAscii_Click);
             this.pbxAscii.Paint += new System.Windows.Forms.PaintEventHandler(this.pbxAscii_Paint);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(203, 572);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
             // 
             // lblHexa
             // 
@@ -153,11 +143,11 @@
             this.tbDetails.Controls.Add(this.lblCreationDate);
             this.tbDetails.Controls.Add(this.lblFileSize);
             this.tbDetails.Controls.Add(this.lblFileName);
-            this.tbDetails.Controls.Add(this.label6);
-            this.tbDetails.Controls.Add(this.label5);
-            this.tbDetails.Controls.Add(this.label4);
-            this.tbDetails.Controls.Add(this.label3);
-            this.tbDetails.Controls.Add(this.label2);
+            this.tbDetails.Controls.Add(this.lblTitleLastAccess);
+            this.tbDetails.Controls.Add(this.lblTitleModDate);
+            this.tbDetails.Controls.Add(this.lblTitleCreationDate);
+            this.tbDetails.Controls.Add(this.lblTitleSize);
+            this.tbDetails.Controls.Add(this.lblTitleName);
             this.tbDetails.Location = new System.Drawing.Point(4, 22);
             this.tbDetails.Name = "tbDetails";
             this.tbDetails.Padding = new System.Windows.Forms.Padding(3);
@@ -211,77 +201,77 @@
             this.lblFileName.TabIndex = 5;
             this.lblFileName.Text = "-";
             // 
-            // label6
+            // lblTitleLastAccess
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 173);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Last access :";
+            this.lblTitleLastAccess.AutoSize = true;
+            this.lblTitleLastAccess.Location = new System.Drawing.Point(0, 173);
+            this.lblTitleLastAccess.Name = "lblTitleLastAccess";
+            this.lblTitleLastAccess.Size = new System.Drawing.Size(70, 13);
+            this.lblTitleLastAccess.TabIndex = 4;
+            this.lblTitleLastAccess.Text = "Last access :";
             // 
-            // label5
+            // lblTitleModDate
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(0, 134);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Modification date :";
+            this.lblTitleModDate.AutoSize = true;
+            this.lblTitleModDate.Location = new System.Drawing.Point(0, 134);
+            this.lblTitleModDate.Name = "lblTitleModDate";
+            this.lblTitleModDate.Size = new System.Drawing.Size(94, 13);
+            this.lblTitleModDate.TabIndex = 3;
+            this.lblTitleModDate.Text = "Modification date :";
             // 
-            // label4
+            // lblTitleCreationDate
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 95);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Creation date :";
+            this.lblTitleCreationDate.AutoSize = true;
+            this.lblTitleCreationDate.Location = new System.Drawing.Point(0, 95);
+            this.lblTitleCreationDate.Name = "lblTitleCreationDate";
+            this.lblTitleCreationDate.Size = new System.Drawing.Size(76, 13);
+            this.lblTitleCreationDate.TabIndex = 2;
+            this.lblTitleCreationDate.Text = "Creation date :";
             // 
-            // label3
+            // lblTitleSize
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Size :";
+            this.lblTitleSize.AutoSize = true;
+            this.lblTitleSize.Location = new System.Drawing.Point(0, 56);
+            this.lblTitleSize.Name = "lblTitleSize";
+            this.lblTitleSize.Size = new System.Drawing.Size(33, 13);
+            this.lblTitleSize.TabIndex = 1;
+            this.lblTitleSize.Text = "Size :";
             // 
-            // label2
+            // lblTitleName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Name :";
+            this.lblTitleName.AutoSize = true;
+            this.lblTitleName.Location = new System.Drawing.Point(0, 17);
+            this.lblTitleName.Name = "lblTitleName";
+            this.lblTitleName.Size = new System.Drawing.Size(41, 13);
+            this.lblTitleName.TabIndex = 0;
+            this.lblTitleName.Text = "Name :";
             // 
             // tbDataReader
             // 
-            this.tbDataReader.Controls.Add(this.label29);
+            this.tbDataReader.Controls.Add(this.lblTitleDouble);
             this.tbDataReader.Controls.Add(this.lblDouble);
-            this.tbDataReader.Controls.Add(this.label25);
+            this.tbDataReader.Controls.Add(this.lblTitleFloat);
             this.tbDataReader.Controls.Add(this.lblFloat);
             this.tbDataReader.Controls.Add(this.lbl64);
-            this.tbDataReader.Controls.Add(this.label28);
-            this.tbDataReader.Controls.Add(this.label21);
+            this.tbDataReader.Controls.Add(this.lblTitleLong);
+            this.tbDataReader.Controls.Add(this.lblTitleUint32);
             this.tbDataReader.Controls.Add(this.lbl32ns);
             this.tbDataReader.Controls.Add(this.lbl32s);
-            this.tbDataReader.Controls.Add(this.label24);
-            this.tbDataReader.Controls.Add(this.label17);
+            this.tbDataReader.Controls.Add(this.lblTitleInt32);
+            this.tbDataReader.Controls.Add(this.lblTitleUint16);
             this.tbDataReader.Controls.Add(this.lbl16ns);
             this.tbDataReader.Controls.Add(this.lbl16s);
-            this.tbDataReader.Controls.Add(this.label20);
-            this.tbDataReader.Controls.Add(this.label12);
+            this.tbDataReader.Controls.Add(this.lblTitleInt16);
+            this.tbDataReader.Controls.Add(this.lblTitleSByte);
             this.tbDataReader.Controls.Add(this.lbl8ns);
             this.tbDataReader.Controls.Add(this.lbl8s);
             this.tbDataReader.Controls.Add(this.lblOctal);
             this.tbDataReader.Controls.Add(this.lblBin);
             this.tbDataReader.Controls.Add(this.lblChar);
-            this.tbDataReader.Controls.Add(this.label13);
-            this.tbDataReader.Controls.Add(this.label14);
-            this.tbDataReader.Controls.Add(this.label15);
-            this.tbDataReader.Controls.Add(this.label16);
+            this.tbDataReader.Controls.Add(this.lblTitbleByte);
+            this.tbDataReader.Controls.Add(this.lblTitleOctal);
+            this.tbDataReader.Controls.Add(this.LblTitleBinary);
+            this.tbDataReader.Controls.Add(this.lblTitleChar);
             this.tbDataReader.Location = new System.Drawing.Point(4, 22);
             this.tbDataReader.Name = "tbDataReader";
             this.tbDataReader.Padding = new System.Windows.Forms.Padding(3);
@@ -290,14 +280,14 @@
             this.tbDataReader.Text = "Data";
             this.tbDataReader.UseVisualStyleBackColor = true;
             // 
-            // label29
+            // lblTitleDouble
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(6, 342);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(47, 13);
-            this.label29.TabIndex = 34;
-            this.label29.Text = "Double :";
+            this.lblTitleDouble.AutoSize = true;
+            this.lblTitleDouble.Location = new System.Drawing.Point(6, 342);
+            this.lblTitleDouble.Name = "lblTitleDouble";
+            this.lblTitleDouble.Size = new System.Drawing.Size(47, 13);
+            this.lblTitleDouble.TabIndex = 34;
+            this.lblTitleDouble.Text = "Double :";
             // 
             // lblDouble
             // 
@@ -308,14 +298,14 @@
             this.lblDouble.TabIndex = 33;
             this.lblDouble.Text = "-";
             // 
-            // label25
+            // lblTitleFloat
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 312);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(36, 13);
-            this.label25.TabIndex = 32;
-            this.label25.Text = "Float :";
+            this.lblTitleFloat.AutoSize = true;
+            this.lblTitleFloat.Location = new System.Drawing.Point(6, 312);
+            this.lblTitleFloat.Name = "lblTitleFloat";
+            this.lblTitleFloat.Size = new System.Drawing.Size(36, 13);
+            this.lblTitleFloat.TabIndex = 32;
+            this.lblTitleFloat.Text = "Float :";
             // 
             // lblFloat
             // 
@@ -335,23 +325,23 @@
             this.lbl64.TabIndex = 30;
             this.lbl64.Text = "-";
             // 
-            // label28
+            // lblTitleLong
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(6, 282);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(58, 13);
-            this.label28.TabIndex = 29;
-            this.label28.Text = "64 bits (s) :";
+            this.lblTitleLong.AutoSize = true;
+            this.lblTitleLong.Location = new System.Drawing.Point(6, 282);
+            this.lblTitleLong.Name = "lblTitleLong";
+            this.lblTitleLong.Size = new System.Drawing.Size(58, 13);
+            this.lblTitleLong.TabIndex = 29;
+            this.lblTitleLong.Text = "64 bits (s) :";
             // 
-            // label21
+            // lblTitleUint32
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 252);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(64, 13);
-            this.label21.TabIndex = 28;
-            this.label21.Text = "32 bits (ns) :";
+            this.lblTitleUint32.AutoSize = true;
+            this.lblTitleUint32.Location = new System.Drawing.Point(6, 252);
+            this.lblTitleUint32.Name = "lblTitleUint32";
+            this.lblTitleUint32.Size = new System.Drawing.Size(64, 13);
+            this.lblTitleUint32.TabIndex = 28;
+            this.lblTitleUint32.Text = "32 bits (ns) :";
             // 
             // lbl32ns
             // 
@@ -371,23 +361,23 @@
             this.lbl32s.TabIndex = 26;
             this.lbl32s.Text = "-";
             // 
-            // label24
+            // lblTitleInt32
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 222);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(58, 13);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "32 bits (s) :";
+            this.lblTitleInt32.AutoSize = true;
+            this.lblTitleInt32.Location = new System.Drawing.Point(6, 222);
+            this.lblTitleInt32.Name = "lblTitleInt32";
+            this.lblTitleInt32.Size = new System.Drawing.Size(58, 13);
+            this.lblTitleInt32.TabIndex = 25;
+            this.lblTitleInt32.Text = "32 bits (s) :";
             // 
-            // label17
+            // lblTitleUint16
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 192);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 13);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "16 bits (ns) :";
+            this.lblTitleUint16.AutoSize = true;
+            this.lblTitleUint16.Location = new System.Drawing.Point(6, 192);
+            this.lblTitleUint16.Name = "lblTitleUint16";
+            this.lblTitleUint16.Size = new System.Drawing.Size(64, 13);
+            this.lblTitleUint16.TabIndex = 24;
+            this.lblTitleUint16.Text = "16 bits (ns) :";
             // 
             // lbl16ns
             // 
@@ -407,23 +397,23 @@
             this.lbl16s.TabIndex = 22;
             this.lbl16s.Text = "-";
             // 
-            // label20
+            // lblTitleInt16
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 162);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(58, 13);
-            this.label20.TabIndex = 21;
-            this.label20.Text = "16 bits (s) :";
+            this.lblTitleInt16.AutoSize = true;
+            this.lblTitleInt16.Location = new System.Drawing.Point(6, 162);
+            this.lblTitleInt16.Name = "lblTitleInt16";
+            this.lblTitleInt16.Size = new System.Drawing.Size(58, 13);
+            this.lblTitleInt16.TabIndex = 21;
+            this.lblTitleInt16.Text = "16 bits (s) :";
             // 
-            // label12
+            // lblTitleSByte
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 132);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(58, 13);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "8 bits (ns) :";
+            this.lblTitleSByte.AutoSize = true;
+            this.lblTitleSByte.Location = new System.Drawing.Point(6, 132);
+            this.lblTitleSByte.Name = "lblTitleSByte";
+            this.lblTitleSByte.Size = new System.Drawing.Size(58, 13);
+            this.lblTitleSByte.TabIndex = 20;
+            this.lblTitleSByte.Text = "8 bits (ns) :";
             // 
             // lbl8ns
             // 
@@ -470,41 +460,41 @@
             this.lblChar.TabIndex = 15;
             this.lblChar.Text = "-";
             // 
-            // label13
+            // lblTitbleByte
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 102);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 13);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "8 bits (s) :";
+            this.lblTitbleByte.AutoSize = true;
+            this.lblTitbleByte.Location = new System.Drawing.Point(6, 102);
+            this.lblTitbleByte.Name = "lblTitbleByte";
+            this.lblTitbleByte.Size = new System.Drawing.Size(52, 13);
+            this.lblTitbleByte.TabIndex = 13;
+            this.lblTitbleByte.Text = "8 bits (s) :";
             // 
-            // label14
+            // lblTitleOctal
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 72);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(38, 13);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "Octal :";
+            this.lblTitleOctal.AutoSize = true;
+            this.lblTitleOctal.Location = new System.Drawing.Point(6, 72);
+            this.lblTitleOctal.Name = "lblTitleOctal";
+            this.lblTitleOctal.Size = new System.Drawing.Size(38, 13);
+            this.lblTitleOctal.TabIndex = 12;
+            this.lblTitleOctal.Text = "Octal :";
             // 
-            // label15
+            // LblTitleBinary
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 42);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 13);
-            this.label15.TabIndex = 11;
-            this.label15.Text = "Binary :";
+            this.LblTitleBinary.AutoSize = true;
+            this.LblTitleBinary.Location = new System.Drawing.Point(6, 42);
+            this.LblTitleBinary.Name = "LblTitleBinary";
+            this.LblTitleBinary.Size = new System.Drawing.Size(42, 13);
+            this.LblTitleBinary.TabIndex = 11;
+            this.LblTitleBinary.Text = "Binary :";
             // 
-            // label16
+            // lblTitleChar
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 12);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(35, 13);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Char :";
+            this.lblTitleChar.AutoSize = true;
+            this.lblTitleChar.Location = new System.Drawing.Point(6, 12);
+            this.lblTitleChar.Name = "lblTitleChar";
+            this.lblTitleChar.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleChar.TabIndex = 10;
+            this.lblTitleChar.Text = "Char :";
             // 
             // msMenu
             // 
@@ -552,7 +542,6 @@
             this.Controls.Add(this.tbcData);
             this.Controls.Add(this.lblAscii);
             this.Controls.Add(this.lblHexa);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pbxAscii);
             this.Controls.Add(this.pbxOutput);
             this.Controls.Add(this.msMenu);
@@ -580,7 +569,6 @@
 
         private System.Windows.Forms.PictureBox pbxOutput;
         private System.Windows.Forms.PictureBox pbxAscii;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblHexa;
         private System.Windows.Forms.Label lblAscii;
         private System.Windows.Forms.TabControl tbcData;
@@ -590,11 +578,11 @@
         private System.Windows.Forms.Label lblCreationDate;
         private System.Windows.Forms.Label lblFileSize;
         private System.Windows.Forms.Label lblFileName;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTitleLastAccess;
+        private System.Windows.Forms.Label lblTitleModDate;
+        private System.Windows.Forms.Label lblTitleCreationDate;
+        private System.Windows.Forms.Label lblTitleSize;
+        private System.Windows.Forms.Label lblTitleName;
         private System.Windows.Forms.TabPage tbDataReader;
         private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -605,25 +593,25 @@
         private System.Windows.Forms.Label lblOctal;
         private System.Windows.Forms.Label lblBin;
         private System.Windows.Forms.Label lblChar;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lblTitbleByte;
+        private System.Windows.Forms.Label lblTitleOctal;
+        private System.Windows.Forms.Label LblTitleBinary;
+        private System.Windows.Forms.Label lblTitleChar;
+        private System.Windows.Forms.Label lblTitleDouble;
         private System.Windows.Forms.Label lblDouble;
-        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lblTitleFloat;
         private System.Windows.Forms.Label lblFloat;
         private System.Windows.Forms.Label lbl64;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lblTitleLong;
+        private System.Windows.Forms.Label lblTitleUint32;
         private System.Windows.Forms.Label lbl32ns;
         private System.Windows.Forms.Label lbl32s;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblTitleInt32;
+        private System.Windows.Forms.Label lblTitleUint16;
         private System.Windows.Forms.Label lbl16ns;
         private System.Windows.Forms.Label lbl16s;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblTitleInt16;
+        private System.Windows.Forms.Label lblTitleSByte;
         private System.Windows.Forms.ToolStripMenuItem tsmiSave;
     }
 }

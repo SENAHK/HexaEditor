@@ -60,6 +60,8 @@ namespace HexaEditor
         {
             if (this.Model.IsInit)
             {
+                this.Model.setPage(this.values);
+
                 // Down
                 if (e.Delta < 0)
                 {
@@ -69,6 +71,7 @@ namespace HexaEditor
                 {
                     this.Model.previousPage();
                 }
+                
                 this.LoadPages();
                 RefreshOutput();
             }
