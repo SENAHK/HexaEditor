@@ -11,7 +11,6 @@ namespace HexaEditor
 {
     public class ModelHexaEditor
     {
-
         private Reader fileReader; //Contient les données entières du fichier
         private bool isInit; //Indique si le fileReader a été initialisé
         private Dictionary<string, string> fileInfos; //Contient les informations relatives au fichier de référence

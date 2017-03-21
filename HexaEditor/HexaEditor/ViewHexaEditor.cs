@@ -68,6 +68,7 @@ namespace HexaEditor
             // Values to show (page)
             this.values = Model.getPageContent();
             this.asciiValues = Model.getASCIIpage();
+            
 
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(this.values, pbxOutput.Width, pbxOutput.Height);
@@ -76,7 +77,6 @@ namespace HexaEditor
 
             pbxAscii.Image = Model.generateDrawnValuesAsAscii(this.asciiValues, pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
-
             
         }
 
@@ -207,7 +207,7 @@ namespace HexaEditor
         private void tsmiSave_Click(object sender, EventArgs e)
         {
             this.Model.setPage(this.values);
-            
+            this.Model.saveFIle();
         }
     }
 }

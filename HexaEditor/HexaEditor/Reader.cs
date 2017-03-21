@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace HexaEditor
 {
@@ -61,6 +62,7 @@ namespace HexaEditor
                 this.InfoFile = new FileInfo(paramPath);
                 this.OpenDate = DateTime.Now.ToString();
             }
+            MessageBox.Show(this.Data.Length.ToString());   
         }
 
         /// <summary>
@@ -98,7 +100,7 @@ namespace HexaEditor
         /// </summary>
         public void writeData()
         {
-            using (BinaryWriter writer = new BinaryWriter(File.Open(this.getShortName(), FileMode.Truncate)))
+            using (BinaryWriter writer = new BinaryWriter(File.Open(this.InfoFile.FullName, FileMode.Truncate)))
             {
                 writer.Write(this.Data);
             }
