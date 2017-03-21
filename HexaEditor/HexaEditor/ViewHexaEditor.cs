@@ -17,6 +17,10 @@ namespace HexaEditor
         private const int ARRAY_WIDTH = 16;
         private ulong page = 0;
         private bool focus = true; //true => Focus pbhexa | false => Focus phASCII
+
+        private string[] values;
+        private string[] asciiValues;
+
         public int SelectedCase
         {
             get { return _selectedCase; }
@@ -62,14 +66,15 @@ namespace HexaEditor
         public void RefreshOutput()
         {
             // Values to show (page)
-            string[] values = Model.getPageContent();
+            this.values = Model.getPageContent();
+            this.asciiValues = Model.getASCIIpage();
 
             // Show in the picturebox
-            pbxOutput.Image = Model.GenerateDrawnValues(Model.getPageContent(), pbxOutput.Width, pbxOutput.Height);
+            pbxOutput.Image = Model.GenerateDrawnValues(this.values, pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
 
 
-            pbxAscii.Image = Model.generateDrawnValuesAsAscii(Model.getASCIIpage(), pbxAscii.Width, pbxAscii.Height);
+            pbxAscii.Image = Model.generateDrawnValuesAsAscii(this.asciiValues, pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
 
             
@@ -82,9 +87,11 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxOutput_Paint(object sender, PaintEventArgs e)
         {
+            //this.values = Model.getPageContent();
+
             if (Model.IsInit)
             {
-                selectCase(this.Model.Cases, Model.getPageContent(), e);
+                selectCase(this.Model.Cases, this.values, e);
             }
         }
 
@@ -95,14 +102,11 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void pbxAscii_Paint(object sender, PaintEventArgs e)
         {
-            //string[] values = Model.getASCIIpage();
-            //for (int i = 0; i < values.Length; i++)
-            //{
-            //    values[i] = Model.getASCII((ulong)i).ToString();
-            //}
+            //this.asciiValues = Model.getASCIIpage();
+
             if (Model.IsInit)
             {
-                selectCase(this.Model.CasesASCII, Model.getASCIIpage(), e);
+                selectCase(this.Model.CasesASCII, this.asciiValues, e);
             }
         }
 
@@ -200,7 +204,10 @@ namespace HexaEditor
             ViewHexaEditor_KeyDown(sender, e);
         }
 
-
-
+        private void tsmiSave_Click(object sender, EventArgs e)
+        {
+            this.Model.setPage(this.values);
+            
+        }
     }
 }

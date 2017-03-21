@@ -11,10 +11,10 @@ namespace HexaEditor
 {
     public class ModelHexaEditor
     {
-        //Contient les données entières du fichier
-        private Reader fileReader;
-        private bool isInit;
-        private Dictionary<string, string> fileInfos;
+
+        private Reader fileReader; //Contient les données entières du fichier
+        private bool isInit; //Indique si le fileReader a été initialisé
+        private Dictionary<string, string> fileInfos; //Contient les informations relatives au fichier de référence
 
         public Dictionary<string, string> FileInfos
         {
@@ -26,7 +26,12 @@ namespace HexaEditor
             get { return isInit; }
             set { isInit = value; }
         }
-        private ulong page = 0;
+
+        private ulong page = 0; // Numéro de la page active
+
+        /// <summary>
+        /// Page suivante
+        /// </summary>
         public void nextPage()
         {
             ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
@@ -36,6 +41,9 @@ namespace HexaEditor
                 page++;
             }
         }
+        /// <summary>
+        /// Page précédente
+        /// </summary>
         public void previousPage()
         {
             if (page > 0)
@@ -44,7 +52,8 @@ namespace HexaEditor
             }
         }
 
-        private const ulong PAGECAPACITY = 16 * 32;
+
+        private const ulong PAGECAPACITY = 16 * 32; //Largeur * hauteur
         private List<Rectangle> cases = new List<Rectangle>();
         private List<Rectangle> casesASCII = new List<Rectangle>();
 
@@ -58,11 +67,16 @@ namespace HexaEditor
             get { return cases; }
             set { cases = value; }
         }
+
         public ModelHexaEditor()
         {
             this.IsInit = false;
         }
 
+        /// <summary>
+        /// Initialise le reader avec une adresse désignée en paramètres
+        /// </summary>
+        /// <param name="path"></param>
         public void initReader(string path)
         {
             this.fileReader = new Reader(path);
@@ -70,6 +84,10 @@ namespace HexaEditor
             this.fileInfos = new Dictionary<string, string>();
             getFileInfos();
         }
+
+        /// <summary>
+        /// Met à jour le dictionaire fileinfo avec les informations du reader
+        /// </summary>
         private void getFileInfos()
         {
             this.FileInfos.Add("Name", this.fileReader.getShortName());
@@ -146,6 +164,10 @@ namespace HexaEditor
 
             return ASCIIpage;
         }
+        /// <summary>
+        /// Revoie la page modifiée par l'utilisateur au reader
+        /// </summary>
+        /// <param name="hexaValues"></param>
         public void setPage(string[] hexaValues)
         {
             byte[] values = new byte[hexaValues.Length];
@@ -157,11 +179,16 @@ namespace HexaEditor
             }
 
             fileReader.updatePseudoPage(values, PAGECAPACITY * page);
-
-
+        }
+        /// <summary>
+        /// Ordonne au reader de sauver son contenu actuel à son emplacement de référence
+        /// </summary>
+        public void saveFIle()
+        {
+            this.fileReader.writeData();
         }
 
-        /// CONVERTING FUNCTIONS \\\
+        // CONVERTING FUNCTIONS \\
 
         /// <summary>
         /// Retourne la valeur d'un entier non signé de 8 bit
@@ -339,10 +366,13 @@ namespace HexaEditor
             }
             return DrawArea;
         }
-
-
-
-
+        /// <summary>
+        /// Genère le tableau ascii
+        /// </summary>
+        /// <param name="values">Valeurs à écrire</param>
+        /// <param name="imageWidth">largeur</param>
+        /// <param name="imageHeight">hauteur</param>
+        /// <returns></returns>
         public Bitmap generateDrawnValuesAsAscii(string[] values, int imageWidth, int imageHeight)
         {
             Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);

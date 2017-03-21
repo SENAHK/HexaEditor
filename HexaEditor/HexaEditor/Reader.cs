@@ -160,6 +160,7 @@ namespace HexaEditor
             string hexa = hexaWrite(value / 16).ToString() + hexaWrite(value % 16).ToString();
             return hexa;
         }
+
         //Convertit une valeur décimale entre 0 et 15 en une valeur hexadécimale 
         public char hexaWrite(int value)
         {

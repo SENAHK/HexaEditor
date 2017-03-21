@@ -73,6 +73,7 @@
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOutput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAscii)).BeginInit();
@@ -517,17 +518,25 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiOpen});
+            this.tsmiOpen,
+            this.tsmiSave});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(115, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
             this.tsmiOpen.Text = "Open ...";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
+            // 
+            // tsmiSave
+            // 
+            this.tsmiSave.Name = "tsmiSave";
+            this.tsmiSave.Size = new System.Drawing.Size(152, 22);
+            this.tsmiSave.Text = "Save";
+            this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
             // 
             // ofdOpenFile
             // 
@@ -612,6 +621,7 @@
         private System.Windows.Forms.Label lbl16s;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSave;
     }
 }
 
