@@ -312,6 +312,7 @@ namespace HexaEditor
         /// <returns></returns>
         public Bitmap GenerateDrawnValues(string[] values, int imageWidth, int imageHeight)
         {
+            this.Cases = new List<Rectangle>();
             Bitmap DrawArea = new Bitmap(imageWidth, imageHeight);
             Graphics g = Graphics.FromImage(DrawArea);
 

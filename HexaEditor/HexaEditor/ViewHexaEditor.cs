@@ -19,7 +19,7 @@ namespace HexaEditor
      * la fin tu tableau (qu'on ne force pas à avoir la taille de la page)
      * 
      *  ++ J'ai besoin d'une variable avec la position du curseur pour modifier l'interieur des cases
-     */ 
+     */
 
     public partial class ViewHexaEditor : Form
     {
@@ -48,7 +48,7 @@ namespace HexaEditor
         {
             InitializeComponent();
             Model = new ModelHexaEditor();
-            
+
             this.MouseWheel += ViewHexaEditor_MouseWheel;
         }
 
@@ -72,7 +72,7 @@ namespace HexaEditor
                 {
                     this.Model.previousPage();
                 }
-                
+
                 this.LoadPages();
                 RefreshOutput();
             }
@@ -96,6 +96,7 @@ namespace HexaEditor
             // Values to show (page)
             this.values = Model.getPageContent();
             this.asciiValues = Model.getASCIIpage();
+            RefreshLabels();
         }
 
         /// <summary>
@@ -121,7 +122,7 @@ namespace HexaEditor
         {
             if (Model.IsInit)
             {
-               
+
                 selectCase(this.Model.Cases, this.values, e);
             }
         }
@@ -160,37 +161,40 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void ViewHexaEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            int t_selectedCase = SelectedCase;
-
-            switch (e.KeyData)
+            if (this.values != null)
             {
-                case Keys.Right:
-                    SelectedCase += 1;
-                    break;
-                case Keys.Down:
-                    SelectedCase += 16;
-                    break;
-                case Keys.Up:
-                    SelectedCase -= 16;
-                    break;
-                case Keys.Left:
-                    SelectedCase -= 1;
-                    break;
+                int t_selectedCase = SelectedCase;
 
-                default:
-                    break;
-            }
+                switch (e.KeyData)
+                {
+                    case Keys.Right:
+                        SelectedCase += 1;
+                        break;
+                    case Keys.Down:
+                        SelectedCase += 16;
+                        break;
+                    case Keys.Up:
+                        SelectedCase -= 16;
+                        break;
+                    case Keys.Left:
+                        SelectedCase -= 1;
+                        break;
 
-            // If the cell is out of range
-            if (SelectedCase < 0 || SelectedCase > values.Length - 1)
-            {
-                SelectedCase = t_selectedCase;
+                    default:
+                        break;
+                }
+
+                // If the cell is out of range
+                if (SelectedCase < 0 || SelectedCase > values.Length - 1)
+                {
+                    SelectedCase = t_selectedCase;
+                }
+                Debug.Print(SelectedCase.ToString());
+                RefreshLabels();
+                // Refresh pbx
+                pbxOutput.Invalidate();
+                pbxAscii.Invalidate();
             }
-            Debug.Print(SelectedCase.ToString());
-            RefreshLabels();
-            // Refresh pbx
-            pbxOutput.Invalidate();
-            pbxAscii.Invalidate();
         }
 
         /// <summary>

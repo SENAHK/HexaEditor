@@ -505,7 +505,7 @@
             this.msMenu.Name = "msMenu";
             this.msMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.msMenu.Size = new System.Drawing.Size(1070, 24);
-            this.msMenu.TabIndex = 0;
+            this.msMenu.TabIndex = 3;
             this.msMenu.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
