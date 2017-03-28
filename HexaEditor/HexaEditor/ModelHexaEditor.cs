@@ -81,6 +81,7 @@ namespace HexaEditor
             this.fileReader = new Reader(path);
             this.IsInit = true;
             this.fileInfos = new Dictionary<string, string>();
+            this.page = 0;
             getFileInfos();
         }
 
@@ -124,7 +125,6 @@ namespace HexaEditor
 
                 count++;
             }
-            MessageBox.Show("values : " + values.Length.ToString());
             return values;
         }
         /// <summary>

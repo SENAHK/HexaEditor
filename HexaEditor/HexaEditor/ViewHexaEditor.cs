@@ -224,6 +224,7 @@ namespace HexaEditor
             if (dr == DialogResult.OK)
             {
                 this.Model.initReader(ofdOpenFile.FileName);
+                this.SelectedCase = 0;
                 this.LoadPages();
                 RefreshOutput();
             }
