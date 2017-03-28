@@ -184,6 +184,7 @@ namespace HexaEditor
             {
                 SelectedCase = t_selectedCase;
             }
+
             RefreshLabels();
             // Refresh pbx
             pbxOutput.Invalidate();
