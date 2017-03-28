@@ -274,17 +274,20 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void ViewHexaEditor_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (focus)
+            if (Model.IsInit)
             {
-                e.KeyChar = Convert.ToChar(e.ToString().ToUpper());
-                if (char.IsNumber(e.KeyChar) || e.KeyChar == 'A' || e.KeyChar == 'B' || e.KeyChar == 'C' || e.KeyChar == 'D' || e.KeyChar == 'F')
+                if (focus)
                 {
-                    WriteFromHexa(e.KeyChar);
+                    e.KeyChar = Convert.ToChar(e.ToString().ToUpper());
+                    if (char.IsNumber(e.KeyChar) || e.KeyChar == 'A' || e.KeyChar == 'B' || e.KeyChar == 'C' || e.KeyChar == 'D' || e.KeyChar == 'F')
+                    {
+                        WriteFromHexa(e.KeyChar);
+                    }
                 }
-            }
-            else
-            {
-                WriteFromAscii(e.KeyChar);
+                else
+                {
+                    WriteFromAscii(e.KeyChar);
+                }
             }
         }
 
@@ -294,15 +297,11 @@ namespace HexaEditor
         /// <param name="value">caractère ascii</param>
         public void WriteFromAscii(char value)
         {
-            int height = 1; //Temporaire
-            int width = 1; //Temporaire
-
-            int position = height * ARRAY_WIDTH + width;
-
-            this.asciiValues[position] = value.ToString();
+            MessageBox.Show("called");
+            this.asciiValues[this.SelectedCase] = value.ToString();
 
             string hexa = Convert.ToString(Convert.ToByte(value), 16);
-            this.values[position] = hexa;
+            this.values[this.SelectedCase] = hexa;
 
             RefreshOutput();
         }
@@ -313,25 +312,27 @@ namespace HexaEditor
         /// <param name="value"></param>
         public void WriteFromHexa(char value)
         {
-            int height = 1; //Temporaire
-            int width = 1; //Temporaire
-
-            int position = height * ARRAY_WIDTH + width;
-            string reff = this.values[position];
+            MessageBox.Show("Called");
+            string reff = this.values[this.SelectedCase];
 
             if (reff.Length == 1)
             {
-                this.values[position] = reff + value;
+                this.values[this.SelectedCase] = reff + value;
             }
             else
             {
-                this.values[position] = value.ToString();
+                this.values[this.SelectedCase] = value.ToString();
             }
 
-            byte numericVal = Convert.ToByte(Convert.ToInt32(this.values[position], 16));
-            this.asciiValues[position] = ((char)numericVal).ToString();
+            byte numericVal = Convert.ToByte(Convert.ToInt32(this.values[this.SelectedCase], 16));
+            this.asciiValues[this.SelectedCase] = ((char)numericVal).ToString();
 
             RefreshOutput();
+        }
+
+        private void tbcData_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ViewHexaEditor_KeyPress(sender, e);
         }
     }
 }

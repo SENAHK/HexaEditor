@@ -135,6 +135,7 @@
             this.tbcData.TabIndex = 9999;
             this.tbcData.TabStop = false;
             this.tbcData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbcData_KeyDown);
+            this.tbcData.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbcData_KeyPress);
             // 
             // tbDetails
             // 
@@ -513,7 +514,7 @@
             this.tsmiOpen,
             this.tsmiSave});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // tsmiOpen
