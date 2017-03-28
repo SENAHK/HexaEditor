@@ -336,6 +336,10 @@ namespace HexaEditor
                     colstop = values.Length % 16;
                 }
             }
+            else
+            {
+                valuesY = 32;
+            }
 
             // Largeur et hauteur des rectangles
             int width = imageWidth / valuesX;
