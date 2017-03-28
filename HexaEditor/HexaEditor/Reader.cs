@@ -61,7 +61,7 @@ namespace HexaEditor
             {
                 this.InfoFile = new FileInfo(paramPath);
                 this.OpenDate = DateTime.Now.ToString();
-            }
+            }  
         }
         /// <summary>
         /// Lis le contenu du fichier inidiqué par le paramètre Path. Les valeurs sont stoquées dans Data

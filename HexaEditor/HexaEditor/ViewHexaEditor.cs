@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -120,6 +121,7 @@ namespace HexaEditor
         {
             if (Model.IsInit)
             {
+               
                 selectCase(this.Model.Cases, this.values, e);
             }
         }
@@ -180,11 +182,11 @@ namespace HexaEditor
             }
 
             // If the cell is out of range
-            if (SelectedCase < 0 || SelectedCase > values.Length)
+            if (SelectedCase < 0 || SelectedCase > values.Length - 1)
             {
                 SelectedCase = t_selectedCase;
             }
-
+            Debug.Print(SelectedCase.ToString());
             RefreshLabels();
             // Refresh pbx
             pbxOutput.Invalidate();

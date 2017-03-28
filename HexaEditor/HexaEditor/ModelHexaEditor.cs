@@ -102,19 +102,21 @@ namespace HexaEditor
         /// <returns></returns>
         public string[] getPageContent()
         {
-            string[] values = new string[PAGECAPACITY];
             ulong start = PAGECAPACITY * page;
             ulong stop;
+            ulong cap;
             if (start + PAGECAPACITY < fileReader.Length)
             {
                 stop = start + PAGECAPACITY;
+                cap = PAGECAPACITY;
             }
             else
             {
                 stop = fileReader.Length;
+                cap = stop - start;
             }
             int count = 0;
-
+            string[] values = new string[cap];
 
             for (ulong i = start; i < stop; i++)
             {
@@ -122,7 +124,7 @@ namespace HexaEditor
 
                 count++;
             }
-
+            MessageBox.Show("values : " + values.Length.ToString());
             return values;
         }
         /// <summary>
@@ -315,12 +317,29 @@ namespace HexaEditor
 
             // Largeur du tableau fixe à 16
             int valuesX = 16;
-            // Hauteur du tableau: si plus grand que 16 (càd une ligne), divisé par 16
-            int valuesY = values.Length > 16 ? values.Length / 16 : 1;
+
+            // Hauteur du tableau
+            int valuesY = 0;
+            int colstop = 16;
+
+            // Gestion des lignes qui ne font pas 16 pour les pages qui ne font pas 32 lignes
+            if (values.Length < (int)PAGECAPACITY)
+            {
+                if (values.Length % 16 == 0)
+                {
+                    valuesY = values.Length / 16;
+                    colstop = 16;
+                }
+                else
+                {
+                    valuesY = values.Length / 16 + 1;
+                    colstop = values.Length % 16;
+                }
+            }
 
             // Largeur et hauteur des rectangles
             int width = imageWidth / valuesX;
-            int height = imageHeight / valuesY;
+            int height = imageHeight / 32;
 
             string output = "";
 
@@ -328,6 +347,10 @@ namespace HexaEditor
             {
                 for (int x = -1; x < valuesX; x++)
                 {
+                    if (y == valuesY-1 && x == colstop)
+                    {
+                        break;
+                    }
                     // En-tête de colonnes
                     if (y < 0)
                     {
@@ -348,9 +371,7 @@ namespace HexaEditor
                             // Valeurs à afficher
                             output = values[y * 16 + x];
                         }
-
-                        string magie = Convert.ToString(154, 16);
-
+                        
                     }
 
                     Rectangle rect = new Rectangle((x + 1) * width, (y + 1) * height, width, height + 1);
