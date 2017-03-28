@@ -278,7 +278,7 @@ namespace HexaEditor
             {
                 if (focus)
                 {
-                    e.KeyChar = Convert.ToChar(e.ToString().ToUpper());
+                    e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
                     if (char.IsNumber(e.KeyChar) || e.KeyChar == 'A' || e.KeyChar == 'B' || e.KeyChar == 'C' || e.KeyChar == 'D' || e.KeyChar == 'F')
                     {
                         WriteFromHexa(e.KeyChar);
@@ -297,11 +297,10 @@ namespace HexaEditor
         /// <param name="value">caractère ascii</param>
         public void WriteFromAscii(char value)
         {
-            MessageBox.Show("called");
             this.asciiValues[this.SelectedCase] = value.ToString();
 
             string hexa = Convert.ToString(Convert.ToByte(value), 16);
-            this.values[this.SelectedCase] = hexa;
+            this.values[this.SelectedCase] = hexa.ToUpper(); ;
 
             RefreshOutput();
         }
@@ -312,7 +311,6 @@ namespace HexaEditor
         /// <param name="value"></param>
         public void WriteFromHexa(char value)
         {
-            MessageBox.Show("Called");
             string reff = this.values[this.SelectedCase];
 
             if (reff.Length == 1)
