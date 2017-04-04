@@ -26,7 +26,7 @@ namespace HexaEditor
             set { isInit = value; }
         }
 
-        private ulong page = 0; // Numéro de la page active
+        private ulong page; // Numéro de la page active
 
         /// <summary>
         /// Page suivante
@@ -70,6 +70,7 @@ namespace HexaEditor
         public ModelHexaEditor()
         {
             this.IsInit = false;
+            this.page = 0;
         }
 
         /// <summary>
@@ -95,6 +96,11 @@ namespace HexaEditor
             this.FileInfos.Add("ModificationDate", this.fileReader.getLastModDate());
             this.FileInfos.Add("Length", this.fileReader.getFileLength());
             this.FileInfos.Add("LastAccess", this.fileReader.getLastAccess());
+        }
+
+        public ulong getCaseByPage(ulong theCase)
+        {
+            return theCase + this.page * PAGECAPACITY;
         }
 
         /// <summary>

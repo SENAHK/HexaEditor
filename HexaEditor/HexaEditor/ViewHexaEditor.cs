@@ -24,20 +24,16 @@ namespace HexaEditor
     public partial class ViewHexaEditor : Form
     {
         private ModelHexaEditor _model;
-        private int _selectedCase = 0;
+        private int _selectedCase;
         private const int ARRAY_WIDTH = 16;
-        private ulong page = 0;
-        private bool focus = true; //true => Focus pbHexa | false => Focus pbASCII
-
+        private bool focus; //true => Focus pbHexa | false => Focus pbASCII
         private string[] values;
         private string[] asciiValues;
-
         public int SelectedCase
         {
             get { return _selectedCase; }
             set { _selectedCase = value; }
         }
-
         public ModelHexaEditor Model
         {
             get { return _model; }
@@ -48,7 +44,8 @@ namespace HexaEditor
         {
             InitializeComponent();
             Model = new ModelHexaEditor();
-
+            this.SelectedCase = 0;
+            this.focus = true;
             this.MouseWheel += ViewHexaEditor_MouseWheel;
         }
 
@@ -202,23 +199,26 @@ namespace HexaEditor
         /// </summary>
         public void RefreshLabels()
         {
+            // Case dans le tableau
+            ulong theCase = this.Model.getCaseByPage((ulong)SelectedCase);
+
             lblFileName.Text = Model.FileInfos["Name"];
             lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
-            lblChar.Text = Model.getASCII((ulong)SelectedCase).ToString();
-            lblBin.Text = Model.getBinary((ulong)SelectedCase);
-            lblOctal.Text = Model.getOctal((ulong)SelectedCase);
-            lbl8s.Text = Model.getSByte((ulong)SelectedCase);
-            lbl8ns.Text = Model.getByte((ulong)SelectedCase);
-            lbl16s.Text = Model.getInt16((ulong)SelectedCase);
-            lbl16ns.Text = Model.getUint16((ulong)SelectedCase);
-            lbl32s.Text = Model.getInt32((ulong)SelectedCase);
+            lblChar.Text = Model.getASCII((ulong)theCase).ToString();
+            lblBin.Text = Model.getBinary((ulong)theCase);
+            lblOctal.Text = Model.getOctal((ulong)theCase);
+            lbl8s.Text = Model.getSByte((ulong)theCase);
+            lbl8ns.Text = Model.getByte((ulong)theCase);
+            lbl16s.Text = Model.getInt16((ulong)theCase);
+            lbl16ns.Text = Model.getUint16((ulong)theCase);
+            lbl32s.Text = Model.getInt32((ulong)theCase);
             //lbl32ns.Text = Model.get((ulong)SelectedCase);
-            lbl64.Text = Model.getInt64((ulong)SelectedCase);
-            lblDouble.Text = Model.getDouble((ulong)SelectedCase);
-            lblFloat.Text = Model.getFloat((ulong)SelectedCase);
+            lbl64.Text = Model.getInt64((ulong)theCase);
+            lblDouble.Text = Model.getDouble((ulong)theCase);
+            lblFloat.Text = Model.getFloat((ulong)theCase);
 
         }
 
