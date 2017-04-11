@@ -463,15 +463,17 @@ namespace HexaEditor
             {
                 for (int x = 0; x < valuesX; x++)
                 {
+                    Brush pinceau = Brushes.Black; 
+
                     output = values[y * 16 + x];
 
-                    Brush pinceau = Brushes.Black;
+                    // Afficher un point gris si caractère non-utilisé
+                    // afin de le différencier d'un point normal
                     if (this.CharIsNotPrintable(output))
                     {
                         pinceau = Brushes.LightGray;
                         output = ".";
                     }
-
 
                     Rectangle rect = new Rectangle(x * width, y * height, width, height + 1);
                     this.CasesASCII.Add(rect);

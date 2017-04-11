@@ -88,10 +88,11 @@ namespace HexaEditor
                     int pos = 0;
                     this.Length = (ulong)b.BaseStream.Length;
                     this.Data = new byte[this.Length];
+
+                    // Si le fichier est vide
                     if (this.Length == 0)
-                    {
                         return false;
-                    }
+
                     while ((ulong)pos < this.Length)
                     {
                         v = b.ReadByte();
