@@ -146,9 +146,15 @@ namespace HexaEditor
         public void selectCase(List<Rectangle> rectanglesToFill, string[] values, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
+            string c = values[SelectedCase];
+            Brush b = Brushes.White;
+            if (this.Model.CharIsNotPrintable(c))
+            {
+                c = ".";
+                b = Brushes.DimGray;
+            }
             g.FillRectangle(Brushes.Blue, rectanglesToFill[SelectedCase]);
-            g.DrawString(values[SelectedCase], new Font("Tahoma", 8), Brushes.White, rectanglesToFill[SelectedCase]);
+            g.DrawString(c, new Font("Tahoma", 8), b, rectanglesToFill[SelectedCase]);
         }
 
         /// <summary>
@@ -202,12 +208,15 @@ namespace HexaEditor
             // Case dans le tableau
             ulong theCase = this.Model.getCaseByPage((ulong)SelectedCase);
 
+            string c = Model.getASCII((ulong)theCase).ToString();
+            lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;  
+
             lblFileName.Text = Model.FileInfos["Name"];
             lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
-            lblChar.Text = Model.getASCII((ulong)theCase).ToString();
+            
             lblBin.Text = Model.getBinary((ulong)theCase);
             lblOctal.Text = Model.getOctal((ulong)theCase);
             lbl8s.Text = Model.getSByte((ulong)theCase);
@@ -308,7 +317,7 @@ namespace HexaEditor
             this.asciiValues[this.SelectedCase] = value.ToString();
 
             string hexa = Convert.ToString(Convert.ToByte(value), 16);
-            this.values[this.SelectedCase] = hexa.ToUpper(); ;
+            this.values[this.SelectedCase] = hexa.ToUpper();
 
             RefreshOutput();
         }

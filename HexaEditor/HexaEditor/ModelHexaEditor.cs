@@ -14,7 +14,7 @@ namespace HexaEditor
         private Reader fileReader; //Contient les données entières du fichier
         private bool isInit; //Indique si le fileReader a été initialisé
         private Dictionary<string, string> fileInfos; //Contient les informations relatives au fichier de référence
-
+        private char nonPrintableChar; // Caractère qui sert à identifier les caractères non-imprimables
         public Dictionary<string, string> FileInfos
         {
             get { return fileInfos; }
@@ -71,6 +71,8 @@ namespace HexaEditor
         {
             this.IsInit = false;
             this.page = 0;
+            // Initialisé avec € car ce caractère n'est pas utilisé pas le codage en iso 8859-1
+            this.nonPrintableChar = '€';
         }
 
         /// <summary>
@@ -133,6 +135,7 @@ namespace HexaEditor
             }
             return values;
         }
+
         /// <summary>
         /// DOnne un tableau du nombre de valeur corrrespondant à la constante PAGECAPACITY, au format ASCII
         /// </summary>
@@ -297,7 +300,22 @@ namespace HexaEditor
         /// <returns></returns>
         public char getASCII(ulong position)
         {
-            return (char)fileReader.GetValue(position);
+            // Positions inutilisées (ISO 8859-1)
+            // 0x00 à 0x1F et 0x7F à 0x9F
+            int min_0x = 0;
+            int max_1x = 31;
+            int min_0x7F = 127;
+            int max_0x9F = 159;
+
+            int c = (int)fileReader.GetValue(position);
+            if ((c >= min_0x && c <= max_1x) || (c >= min_0x7F && c <= max_0x9F))
+            {
+                return nonPrintableChar;
+            }
+            else
+            {
+                return (char)c;
+            }
         }
         /// <summary>
         /// Retourne en base huit la valeur de l'indexe donné sous forme de string
@@ -308,7 +326,19 @@ namespace HexaEditor
         {
             return Convert.ToString(fileReader.GetValue(position), 8);
         }
-
+        /// <summary>
+        /// CharIsNotPrintable permet de savoir si c correspond au caractère non utilisé
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public bool CharIsNotPrintable(char c)
+        {
+            return (c == nonPrintableChar);
+        }
+        public bool CharIsNotPrintable(string c)
+        {
+            return (c == nonPrintableChar.ToString());
+        }
         /// <summary>
         /// Création d'une image bitmap contenant les valeurs passé en paramètres
         /// </summary>
@@ -358,7 +388,7 @@ namespace HexaEditor
             {
                 for (int x = -1; x < valuesX; x++)
                 {
-                    if (y == valuesY-1 && x == colstop)
+                    if (y == valuesY - 1 && x == colstop)
                     {
                         break;
                     }
@@ -382,7 +412,7 @@ namespace HexaEditor
                             // Valeurs à afficher
                             output = values[y * 16 + x];
                         }
-                        
+
                     }
 
                     Rectangle rect = new Rectangle((x + 1) * width, (y + 1) * height, width, height + 1);
@@ -426,15 +456,20 @@ namespace HexaEditor
                 for (int x = 0; x < valuesX; x++)
                 {
                     output = values[y * 16 + x];
-                    // Valeurs à afficher
-                    //int key = y * 16 + x;
-                    //char chr = getASCII((ulong)key);
-                    //output = (chr != (char)0) ? chr.ToString() : '.'.ToString();
+
+                    Brush pinceau = Brushes.Black;
+                    if (this.CharIsNotPrintable(output))
+                    {
+                        pinceau = Brushes.LightGray;
+                        output = ".";
+                    }
+
 
                     Rectangle rect = new Rectangle(x * width, y * height, width, height + 1);
                     this.CasesASCII.Add(rect);
+
                     // Afficher les éléments du tableau dans une surface de dessin
-                    g.DrawString(output, new Font("Courier New", 8), Brushes.Black, rect);
+                    g.DrawString(output, new Font("Tahoma", 8), pinceau, rect);
                 }
             }
             return DrawArea;

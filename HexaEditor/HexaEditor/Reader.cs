@@ -52,8 +52,7 @@ namespace HexaEditor
             set { _path = value; }
         }
 
-        ///  CONSTRUCTOR & CONSTRUCTION RELATED FUNCTIONS  \\\
-        
+        ///  CONSTRUCTOR & CONSTRUCTION RELATED FUNCTIONS  \\\        
         public Reader(string paramPath)
         {
             this.Path = paramPath;
@@ -121,8 +120,6 @@ namespace HexaEditor
         }
 
         /// FILE INFO FUNCTIONS \\\
-
-
         //Donne la date et l'heure de la dernière écriture dans le fichier
         public string getLastModDate()
         {
@@ -152,7 +149,6 @@ namespace HexaEditor
         }
 
         ///  DATA CONVERTING FUNCTIONS  \\\
-
         //Retourne la valeur de l'ofset donné en hexadécimal
         public string getHexa(ulong offset)
         {
@@ -174,6 +170,7 @@ namespace HexaEditor
             }
             return '0';
         }
+
         public byte GetValue(ulong offset)
         {
             return Data[offset];
