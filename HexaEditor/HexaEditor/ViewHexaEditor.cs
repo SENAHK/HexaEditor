@@ -82,7 +82,7 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void ViewHexaEditor_Load(object sender, EventArgs e)
         {
-            //RefreshOutput();
+            this.Select();
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace HexaEditor
             // Case dans le tableau
             ulong theCase = this.Model.getCaseByPage((ulong)SelectedCase);
 
-            lblPage.Text = Model.getPage();
+            lblPage.Text = String.Format("Page {0} sur {1}", this.Model.Page + 1, this.Model.TotalPages + 1);
             lblFileName.Text = Model.FileInfos["Name"];
             lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
@@ -263,7 +263,7 @@ namespace HexaEditor
             // Remove the default behaviour that allows navigating in the tabs with the arrow keys
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
                 e.Handled = true;
-            // 
+             
             ViewHexaEditor_KeyDown(sender, e);
         }
 
@@ -360,9 +360,5 @@ namespace HexaEditor
             RefreshOutput();
         }
 
-        private void tbcData_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ViewHexaEditor_KeyPress(sender, e);
-        }
     }
 }

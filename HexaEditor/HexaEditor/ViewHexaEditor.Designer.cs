@@ -136,7 +136,6 @@
             this.tbcData.TabIndex = 9999;
             this.tbcData.TabStop = false;
             this.tbcData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbcData_KeyDown);
-            this.tbcData.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbcData_KeyPress);
             // 
             // tbDetails
             // 

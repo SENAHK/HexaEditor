@@ -38,16 +38,25 @@ namespace HexaEditor
 
         // Numéro de la page active
         private ulong page;
+        public ulong Page
+        {
+            get { return page; }
+            set { page = value; }
+        }
 
+        // Nombre total de pages 
         private ulong totalPages;
+        public ulong TotalPages
+        {
+            get { return totalPages; }
+            set { totalPages = value; }
+        }
 
         /// <summary>
         /// Page suivante
         /// </summary>
         public void nextPage()
         {
-            //ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
-
             if (page < totalPages)
             {
                 page++;
@@ -195,10 +204,6 @@ namespace HexaEditor
             return ASCIIpage;
         }
 
-        public string getPage()
-        {            
-            return String.Format("Page {0} sur {1}", this.page + 1, totalPages + 1);
-        }
         /// <summary>
         /// Revoie la page modifiée par l'utilisateur au reader
         /// </summary>
