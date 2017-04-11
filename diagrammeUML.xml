@@ -1,0 +1,88 @@
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>160</x><y>178</y><w>330</w><h>300</h></coordinates><panel_attributes>&lt;&lt;Reader&gt;&gt;
+--
+-_data: byte[]
+-_infoFile: FileInfo
+-_length: ulong
+-_openDate: string
+-_path: string
+--
++Data: byte[]
++InfoFile: FileInfo
++Length: ulong
++OpenDate: string
++Path: string
+--
+Reader(string paramPath):
+getCreationDate(): string
+getFileLength(): string
+getHexa(ulong offset): string
+getLastAccess(): string
+getLastModDate(): string
+getShortName(): string
+getValue(ulong offset): byte
+hexaWrite(int value): char
+readData(): bool
+updatePseudoPage(bytes[] values, ulong startId): void
+writeData(): void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>528</y><w>330</w><h>300</h></coordinates><panel_attributes>&lt;&lt;ViewHexaEditor&gt;&gt;
+--
+-_model: ModelHexaEditor
+-_selectedCase: int
+-ARRAY_WIDTH: int
+-_values: string[]
+-asciiValues: string[]
+-_focus: bool
+--
++Model: ModelHexaEditor
++SelectedCase: int
+--
+LoadPages(): void
+RefreshLabels(): void
+SelectCase(List&lt;Rectangle&gt;, string[], PaintEventArgs): void
+RefreshOutput(): void
+WriteFromASCII(char): void
+WriteFromHexa(char): void
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>178</y><w>330</w><h>510</h></coordinates><panel_attributes>&lt;&lt;ModelHexaEditor&gt;&gt;
+--
+-_cases: List&lt;Rectangle&gt;
+-_casesAscii: List&lt;Rectangle&gt;
+-_filesInfos: Dictionnary&lt;string, string&gt;
+-_fileReader: Reader
+-_isInit: bool
+-_page: ulong
+-PAGECAPACITY: ulong
+--
++Cases: List&lt;Rectangle&gt;
++CasesAscii: List&lt;Rectangle&gt;
++FilesInfos: Dictionnary&lt;string, string&gt;
++IsInit: bool
+--
+ModelHexaEditor():
+GenerateDrawnValues(): Bitmap
+GenerateDrawnValuesAsAscii(): Bitmap
+InitReader(string): void
+NextPage(): void
+PreviousPage(): void
+SaveFile(): void
+SetPage(string[]): void
+GetAscii(ulong): char
+GetAsciiPage(): string[]
+GetBinary(ulong): string
+GetByte(ulong): string
+GetCaseByPage(ulong): ulong
+GetDouble(ulong): string
+GetFileInfos(): void
+GetFloat(ulong): string
+GetByte(ulong): string
+GetInt16(ulong): string
+GetInt32(ulong): string
+GetInt64(ulong): string
+GetOctal(ulong): string
+GetOctal(ulong): string
+GetSByte(ulong): string
+GetUInt16(ulong): string
+
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
