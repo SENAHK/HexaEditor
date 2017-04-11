@@ -196,8 +196,7 @@ namespace HexaEditor
         }
 
         public string getPage()
-        {
-            //ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
+        {            
             return String.Format("Page {0} sur {1}", this.page + 1, totalPages + 1);
         }
         /// <summary>
