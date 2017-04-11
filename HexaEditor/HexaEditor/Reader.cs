@@ -52,15 +52,27 @@ namespace HexaEditor
             set { _path = value; }
         }
 
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get { return _isEmpty; }
+            set { _isEmpty = value; }
+        }
+
         ///  CONSTRUCTOR & CONSTRUCTION RELATED FUNCTIONS  \\\        
         public Reader(string paramPath)
         {
             this.Path = paramPath;
             if (readData())
             {
+                this.IsEmpty = false;
                 this.InfoFile = new FileInfo(paramPath);
                 this.OpenDate = DateTime.Now.ToString();
-            }  
+            }
+            else
+            {
+                this.IsEmpty = true;
+            }
         }
         /// <summary>
         /// Lis le contenu du fichier inidiqué par le paramètre Path. Les valeurs sont stoquées dans Data
@@ -76,6 +88,10 @@ namespace HexaEditor
                     int pos = 0;
                     this.Length = (ulong)b.BaseStream.Length;
                     this.Data = new byte[this.Length];
+                    if (this.Length == 0)
+                    {
+                        return false;
+                    }
                     while ((ulong)pos < this.Length)
                     {
                         v = b.ReadByte();

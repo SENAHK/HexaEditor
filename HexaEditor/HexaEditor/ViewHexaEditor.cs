@@ -90,10 +90,22 @@ namespace HexaEditor
         /// </summary>
         public void LoadPages()
         {
-            // Values to show (page)
-            this.values = Model.getPageContent();
-            this.asciiValues = Model.getASCIIpage();
-            RefreshLabels();
+            // Le modèle a été initialisé
+            if (this.Model.IsInit)
+            {
+                // Values to show (page)
+                this.values = Model.getPageContent();
+                this.asciiValues = Model.getASCIIpage();
+                RefreshOutput();
+                RefreshLabels();
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("Ce fichier est vide, impossible d'afficher son contenu", "Erreur de lecture", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (dr == DialogResult.OK)
+                    tsmiOpen.PerformClick();
+            }
         }
 
         /// <summary>
@@ -101,6 +113,7 @@ namespace HexaEditor
         /// </summary>
         public void RefreshOutput()
         {
+
             // Show in the picturebox
             pbxOutput.Image = Model.GenerateDrawnValues(this.values, pbxOutput.Width, pbxOutput.Height);
             pbxOutput.Invalidate();
@@ -108,6 +121,7 @@ namespace HexaEditor
 
             pbxAscii.Image = Model.generateDrawnValuesAsAscii(this.asciiValues, pbxAscii.Width, pbxAscii.Height);
             pbxAscii.Invalidate();
+
         }
 
         /// <summary>
@@ -209,14 +223,14 @@ namespace HexaEditor
             ulong theCase = this.Model.getCaseByPage((ulong)SelectedCase);
 
             string c = Model.getASCII((ulong)theCase).ToString();
-            lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;  
+            lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;
 
             lblFileName.Text = Model.FileInfos["Name"];
             lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
-            
+
             lblBin.Text = Model.getBinary((ulong)theCase);
             lblOctal.Text = Model.getOctal((ulong)theCase);
             lbl8s.Text = Model.getSByte((ulong)theCase);
@@ -239,7 +253,6 @@ namespace HexaEditor
                 this.Model.initReader(ofdOpenFile.FileName);
                 this.SelectedCase = 0;
                 this.LoadPages();
-                RefreshOutput();
             }
         }
 

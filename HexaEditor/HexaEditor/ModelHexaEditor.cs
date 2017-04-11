@@ -82,10 +82,18 @@ namespace HexaEditor
         public void initReader(string path)
         {
             this.fileReader = new Reader(path);
-            this.IsInit = true;
-            this.fileInfos = new Dictionary<string, string>();
-            this.page = 0;
-            getFileInfos();
+
+            if (this.fileReader.IsEmpty)
+            {
+                this.IsInit = false;
+            }
+            else
+            {
+                this.IsInit = true;
+                this.fileInfos = new Dictionary<string, string>();
+                this.page = 0;
+                getFileInfos();
+            }
         }
 
         /// <summary>
