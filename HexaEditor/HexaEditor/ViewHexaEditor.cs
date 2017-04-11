@@ -222,9 +222,7 @@ namespace HexaEditor
             // Case dans le tableau
             ulong theCase = this.Model.getCaseByPage((ulong)SelectedCase);
 
-            string c = Model.getASCII((ulong)theCase).ToString();
-            lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;
-
+            lblPage.Text = Model.getPage();
             lblFileName.Text = Model.FileInfos["Name"];
             lblFileSize.Text = Model.FileInfos["Length"] + " octets";
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
@@ -242,6 +240,10 @@ namespace HexaEditor
             lbl64.Text = Model.getInt64((ulong)theCase);
             lblDouble.Text = Model.getDouble((ulong)theCase);
             lblFloat.Text = Model.getFloat((ulong)theCase);
+
+            // Ascii value
+            string c = Model.getASCII((ulong)theCase).ToString();
+            lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;
 
         }
 

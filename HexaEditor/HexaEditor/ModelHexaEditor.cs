@@ -11,31 +11,44 @@ namespace HexaEditor
 {
     public class ModelHexaEditor
     {
-        private Reader fileReader; //Contient les données entières du fichier
-        private bool isInit; //Indique si le fileReader a été initialisé
-        private Dictionary<string, string> fileInfos; //Contient les informations relatives au fichier de référence
-        private char nonPrintableChar; // Caractère qui sert à identifier les caractères non-imprimables
-        public Dictionary<string, string> FileInfos
-        {
-            get { return fileInfos; }
-            set { fileInfos = value; }
-        }
+        // Contient les données entières du fichier
+        private Reader fileReader;
+
+        // Indique si le fileReader a été initialisé
+        private bool isInit;
         public bool IsInit
         {
             get { return isInit; }
             set { isInit = value; }
         }
 
-        private ulong page; // Numéro de la page active
+        
+
+        // Contient les informations relatives au fichier de référence
+        private Dictionary<string, string> fileInfos;
+        public Dictionary<string, string> FileInfos
+        {
+            get { return fileInfos; }
+            set { fileInfos = value; }
+        }
+
+        // Caractère qui sert à identifier les caractères non-utilisés en iso 8859-1,
+        // initialisé avec € car ce caractère n'est pas utilisé par le codage 
+        private const char nonPrintableChar = '€';
+
+        // Numéro de la page active
+        private ulong page;
+
+        private ulong totalPages;
 
         /// <summary>
         /// Page suivante
         /// </summary>
         public void nextPage()
         {
-            ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
+            //ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
 
-            if (page < length)
+            if (page < totalPages)
             {
                 page++;
             }
@@ -71,8 +84,6 @@ namespace HexaEditor
         {
             this.IsInit = false;
             this.page = 0;
-            // Initialisé avec € car ce caractère n'est pas utilisé pas le codage en iso 8859-1
-            this.nonPrintableChar = '€';
         }
 
         /// <summary>
@@ -92,6 +103,7 @@ namespace HexaEditor
                 this.IsInit = true;
                 this.fileInfos = new Dictionary<string, string>();
                 this.page = 0;
+                this.totalPages = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
                 getFileInfos();
             }
         }
@@ -181,6 +193,12 @@ namespace HexaEditor
             }
 
             return ASCIIpage;
+        }
+
+        public string getPage()
+        {
+            //ulong length = (ulong)Convert.ToInt32(Math.Ceiling(Convert.ToDouble((ulong)fileReader.Data.Length / PAGECAPACITY)));
+            return String.Format("Page {0} sur {1}", this.page + 1, totalPages + 1);
         }
         /// <summary>
         /// Revoie la page modifiée par l'utilisateur au reader
@@ -309,13 +327,15 @@ namespace HexaEditor
         public char getASCII(ulong position)
         {
             // Positions inutilisées (ISO 8859-1)
-            // 0x00 à 0x1F et 0x7F à 0x9F
+            // 0x00 à 0x1F et 0x7F à 0x9F en décimal
             int min_0x = 0;
             int max_1x = 31;
             int min_0x7F = 127;
             int max_0x9F = 159;
 
+            // Valeur décimale du byte
             int c = (int)fileReader.GetValue(position);
+
             if ((c >= min_0x && c <= max_1x) || (c >= min_0x7F && c <= max_0x9F))
             {
                 return nonPrintableChar;

@@ -74,6 +74,7 @@
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.lblPage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOutput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAscii)).BeginInit();
             this.tbcData.SuspendLayout();
@@ -535,11 +536,20 @@
             // 
             this.ofdOpenFile.FileName = "openFileDialog1";
             // 
+            // lblPage
+            // 
+            this.lblPage.Location = new System.Drawing.Point(259, 496);
+            this.lblPage.Name = "lblPage";
+            this.lblPage.Size = new System.Drawing.Size(463, 23);
+            this.lblPage.TabIndex = 10000;
+            this.lblPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ViewHexaEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 594);
+            this.ClientSize = new System.Drawing.Size(1070, 533);
+            this.Controls.Add(this.lblPage);
             this.Controls.Add(this.tbcData);
             this.Controls.Add(this.lblAscii);
             this.Controls.Add(this.lblHexa);
@@ -614,6 +624,7 @@
         private System.Windows.Forms.Label lblTitleInt16;
         private System.Windows.Forms.Label lblTitleSByte;
         private System.Windows.Forms.ToolStripMenuItem tsmiSave;
+        private System.Windows.Forms.Label lblPage;
     }
 }
 
