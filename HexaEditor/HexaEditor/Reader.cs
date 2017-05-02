@@ -228,7 +228,6 @@ namespace HexaEditor
             {
                 return 0;
             }
-            
         }
         public void addStates(Stack<string> s)
         {

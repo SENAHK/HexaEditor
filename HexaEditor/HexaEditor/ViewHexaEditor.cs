@@ -175,42 +175,78 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void ViewHexaEditor_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (this.values != null)
             {
-                int t_selectedCase = SelectedCase;
 
+                int t_selectedCase = SelectedCase;
+                bool move = false;
                 switch (e.KeyData)
                 {
                     case Keys.Right:
-                        SelectedCase += 1;
+                        if (SelectedCase+1 < values.Length)
+                        {
+                            t_selectedCase += 1;
+                            move = true;
+                        }
                         break;
                     case Keys.Down:
-                        SelectedCase += 16;
+                        if (SelectedCase+16 < values.Length)
+                        {
+                            t_selectedCase += 16;
+                            move = true;
+                        }
                         break;
                     case Keys.Up:
-                        SelectedCase -= 16;
+                        if (SelectedCase - 16 >= 0)
+                        {
+                            t_selectedCase -= 16;
+                            move = true;
+                        }
                         break;
                     case Keys.Left:
-                        SelectedCase -= 1;
+                        if (SelectedCase - 1 >= 0)
+                        {
+                            t_selectedCase -= 1;
+                            move = true;
+                        }
                         break;
 
                     default:
                         break;
                 }
 
-                // If the cell is out of range
+                /* If the cell is out of range
                 if (SelectedCase < 0 || SelectedCase > values.Length - 1)
                 {
                     SelectedCase = t_selectedCase;
+                    move = false;
+                }*/
+
+                if (move)
+                {
+                    completeSelectedCase();
+                    this.SelectedCase = t_selectedCase;
+                    RefreshLabels();
+                    pbxOutput.Invalidate();
+                    pbxAscii.Invalidate();
                 }
 
                 Debug.Print(SelectedCase.ToString());
 
                 // Refresh pbx
-                RefreshLabels();
-                pbxOutput.Invalidate();
-                pbxAscii.Invalidate();
+                
+            }
+        }
+        /// <summary>
+        /// Ne marche pas
+        /// </summary>
+        /// <param name="thisCase"></param>
+        private void completeSelectedCase()
+        {
+            //MessageBox.Show(this.values[thisCase].Length.ToString());
+            if (this.values[this.SelectedCase].Length < 2)
+            {
+                this.values[this.SelectedCase] = '0' + this.values[this.SelectedCase];
             }
         }
         /// <summary>
@@ -325,10 +361,10 @@ namespace HexaEditor
             string hexa = Convert.ToString(Convert.ToByte(value), 16);
             this.values[this.SelectedCase] = hexa.ToUpper();
 
-            if (saveState)
+            /*if (saveState)
             {
                 this.Model.addState(value, this.SelectedCase);
-            }
+            }*/
 
             RefreshOutput();
         }
@@ -352,6 +388,8 @@ namespace HexaEditor
 
             byte numericVal = Convert.ToByte(Convert.ToInt32(this.values[this.SelectedCase], 16));
             this.asciiValues[this.SelectedCase] = ((char)numericVal).ToString();
+
+            //this.Model.addState(Convert.ToChar(numericVal), this.SelectedCase);
 
             RefreshOutput();
         }
@@ -383,7 +421,6 @@ namespace HexaEditor
                 this.SelectedCase = stateID;
                 this.WriteFromAscii(Convert.ToChar(stateValue), false);
             }
-            
         }
     }
 }
