@@ -83,6 +83,9 @@ namespace HexaEditor
         private void ViewHexaEditor_Load(object sender, EventArgs e)
         {
             this.Select();
+
+            // Priority to the form when a key event is triggered
+            this.KeyPreview = true;
         }
 
         /// <summary>
@@ -178,6 +181,7 @@ namespace HexaEditor
         /// <param name="e"></param>
         private void ViewHexaEditor_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (this.values != null)
             {
                 int t_selectedCase = SelectedCase;
@@ -206,9 +210,11 @@ namespace HexaEditor
                 {
                     SelectedCase = t_selectedCase;
                 }
+
                 Debug.Print(SelectedCase.ToString());
-                RefreshLabels();
+
                 // Refresh pbx
+                RefreshLabels();
                 pbxOutput.Invalidate();
                 pbxAscii.Invalidate();
             }
@@ -249,6 +255,7 @@ namespace HexaEditor
 
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
+            ofdOpenFile.FileName = "";
             DialogResult dr = ofdOpenFile.ShowDialog();
             if (dr == DialogResult.OK)
             {
@@ -262,9 +269,7 @@ namespace HexaEditor
         {
             // Remove the default behaviour that allows navigating in the tabs with the arrow keys
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
-                e.Handled = true;
-             
-            ViewHexaEditor_KeyDown(sender, e);
+                e.Handled = true;             
         }
 
         /// <summary>
