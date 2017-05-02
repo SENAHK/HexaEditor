@@ -75,6 +75,8 @@
             this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.lblPage = new System.Windows.Forms.Label();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOutput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAscii)).BeginInit();
             this.tbcData.SuspendLayout();
@@ -500,7 +502,8 @@
             // msMenu
             // 
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -520,14 +523,14 @@
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(115, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
             this.tsmiOpen.Text = "Open ...";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
             // tsmiSave
             // 
             this.tsmiSave.Name = "tsmiSave";
-            this.tsmiSave.Size = new System.Drawing.Size(115, 22);
+            this.tsmiSave.Size = new System.Drawing.Size(152, 22);
             this.tsmiSave.Text = "Save";
             this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
             // 
@@ -542,6 +545,20 @@
             this.lblPage.Size = new System.Drawing.Size(463, 23);
             this.lblPage.TabIndex = 10000;
             this.lblPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.undoToolStripMenuItem.Text = "Undo";
             // 
             // ViewHexaEditor
             // 
@@ -624,6 +641,8 @@
         private System.Windows.Forms.Label lblTitleSByte;
         private System.Windows.Forms.ToolStripMenuItem tsmiSave;
         private System.Windows.Forms.Label lblPage;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
     }
 }
 

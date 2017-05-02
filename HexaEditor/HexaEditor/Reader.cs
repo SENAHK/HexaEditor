@@ -20,6 +20,14 @@ namespace HexaEditor
             set { _data = value; }
         }
 
+        //Modifications apportées au fichier
+        private Stack<string> _states;
+        private Stack<string> States
+        {
+            get { return _states; }
+            set { _states = value; }
+        }
+
         //Classe permettant d'accéder à tout les détails du fichier
         private FileInfo _infoFile;
         public FileInfo InfoFile
@@ -191,6 +199,45 @@ namespace HexaEditor
         public byte GetValue(ulong offset)
         {
             return Data[offset];
+        }
+
+        /// UNDO FUNCTIONS \\\
+        
+        /// <summary>
+        /// Rétabli la dernière valeur modifiée si celle ci existe dans le tableau des modifications
+        /// </summary>
+        /// <returns>
+        /// la page de la modification si elle existe
+        /// 0 si aucune modification n'est enregistrée
+        /// </returns>
+        public ulong previousState()
+        {
+            if (this.States.Count > 0)
+            {
+                string stateCode = States.Pop();
+                byte stateValue = Convert.ToByte(stateCode[0]);
+                char[] tmpID = new char[stateCode.Length - 1];
+                Array.Copy(stateCode.ToCharArray(), 1, tmpID, 0, stateCode.Length - 1);
+                ulong stateID = (ulong)Convert.ToInt64(new string(tmpID));
+
+                Data[stateID] = stateValue;
+
+                return stateID;
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+        public void addStates(Stack<string> s)
+        {
+            string[] externalStates = s.ToArray();
+            Array.Reverse(externalStates);
+            foreach (string item in externalStates)
+            {
+                this.States.Push(item);
+            }
         }
     }
 }

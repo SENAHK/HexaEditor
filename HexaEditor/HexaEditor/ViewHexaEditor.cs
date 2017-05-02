@@ -23,6 +23,7 @@ namespace HexaEditor
 
     public partial class ViewHexaEditor : Form
     {
+        
         private ModelHexaEditor _model;
         private int _selectedCase;
         private const int ARRAY_WIDTH = 16;
@@ -74,7 +75,6 @@ namespace HexaEditor
                 RefreshOutput();
             }
         }
-
         /// <summary>
         /// Load de la form
         /// </summary>
@@ -87,7 +87,6 @@ namespace HexaEditor
             // Priority to the form when a key event is triggered
             this.KeyPreview = true;
         }
-
         /// <summary>
         /// Charge les pages référencée par le paramètre page du model
         /// </summary>
@@ -110,7 +109,6 @@ namespace HexaEditor
                     tsmiOpen.PerformClick();
             }
         }
-
         /// <summary>
         /// Met à jour le contenu des tableaux en fonction du paramètre value
         /// </summary>
@@ -126,7 +124,6 @@ namespace HexaEditor
             pbxAscii.Invalidate();
 
         }
-
         /// <summary>
         /// Paint the selection cursor in the hexa picturebox
         /// </summary>
@@ -140,7 +137,6 @@ namespace HexaEditor
                 selectCase(this.Model.Cases, this.values, e);
             }
         }
-
         /// <summary>
         /// Paint the selection cursor in the ascii picturebox
         /// </summary>
@@ -153,7 +149,6 @@ namespace HexaEditor
                 selectCase(this.Model.CasesASCII, this.asciiValues, e);
             }
         }
-
         /// <summary>
         /// Select the case by painting it
         /// </summary>
@@ -173,7 +168,6 @@ namespace HexaEditor
             g.FillRectangle(Brushes.Blue, rectanglesToFill[SelectedCase]);
             g.DrawString(c, new Font("Tahoma", 8), b, rectanglesToFill[SelectedCase]);
         }
-
         /// <summary>
         /// Controls of the cursor: Arrow keys
         /// </summary>
@@ -219,7 +213,6 @@ namespace HexaEditor
                 pbxAscii.Invalidate();
             }
         }
-
         /// <summary>
         /// Mets à jour les labels d'information
         /// </summary>
@@ -252,7 +245,6 @@ namespace HexaEditor
             lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;
 
         }
-
         private void tsmiOpen_Click(object sender, EventArgs e)
         {
             ofdOpenFile.FileName = "";
@@ -264,14 +256,12 @@ namespace HexaEditor
                 this.LoadPages();
             }
         }
-
         private void tbcData_KeyDown(object sender, KeyEventArgs e)
         {
             // Remove the default behaviour that allows navigating in the tabs with the arrow keys
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
                 e.Handled = true;             
         }
-
         /// <summary>
         /// Onglet save du menu
         /// </summary>
@@ -282,7 +272,6 @@ namespace HexaEditor
             this.Model.setPage(this.values);
             this.Model.saveFIle();
         }
-
         /// <summary>
         /// Click sur le tableau des Hexadécimaux => met le focus dessus
         /// </summary>
@@ -292,7 +281,6 @@ namespace HexaEditor
         {
             this.focus = true;
         }
-
         /// <summary>
         /// Cick sur le tableau des ascii  => met le focus dessus
         /// </summary>
@@ -302,7 +290,6 @@ namespace HexaEditor
         {
             this.focus = false;
         }
-
         /// <summary>
         /// Filtre les caractères en fonction du focus de l'utilisateur sur l'un des tableaux
         /// Renvoie à l'une des fonctions d'écriture si les caractères sont valides
@@ -323,21 +310,25 @@ namespace HexaEditor
                 }
                 else
                 {
-                    WriteFromAscii(e.KeyChar);
+                    WriteFromAscii(e.KeyChar, true);
                 }
             }
         }
-
         /// <summary>
         /// écris la valeur en l'état dans le tableau ascii et la convertit en hexadécimal pour l'écrire dans le tableau des hexa
         /// </summary>
         /// <param name="value">caractère ascii</param>
-        public void WriteFromAscii(char value)
+        public void WriteFromAscii(char value, bool saveState)
         {
             this.asciiValues[this.SelectedCase] = value.ToString();
 
             string hexa = Convert.ToString(Convert.ToByte(value), 16);
             this.values[this.SelectedCase] = hexa.ToUpper();
+
+            if (saveState)
+            {
+                this.Model.addState(value, this.SelectedCase);
+            }
 
             RefreshOutput();
         }
@@ -364,6 +355,35 @@ namespace HexaEditor
 
             RefreshOutput();
         }
+        /// <summary>
+        /// Anulle la dernière action et redirige l'affichage sur l'emplacement de cette action
+        /// </summary>
+        public void undo()
+        {
+            string result = Model.undo();
+            int cursor;
+            if (int.TryParse(result, out cursor))
+            {
+                if (cursor != -1)
+                {
+                    this.values = Model.getPageContent();
+                    this.asciiValues = Model.getASCIIpage();
+                    this.SelectedCase = cursor;
+                    this.RefreshOutput();
+                    this.RefreshLabels();
+                }
+            }
+            else
+            {
+                byte stateValue = Convert.ToByte(result[0]);
+                char[] tmpID = new char[result.Length - 1];
+                Array.Copy(result.ToCharArray(), 1, tmpID, 0, result.Length - 1);
+                int stateID = Convert.ToInt32(new string(tmpID));
 
+                this.SelectedCase = stateID;
+                this.WriteFromAscii(Convert.ToChar(stateValue), false);
+            }
+            
+        }
     }
 }

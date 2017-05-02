@@ -14,6 +14,9 @@ namespace HexaEditor
         // Contient les données entières du fichier
         private Reader fileReader;
 
+        //Contient la liste des modifiction de cette page depuis son ouverture 
+        private Stack<string> internalStates;
+
         // Indique si le fileReader a été initialisé
         private bool isInit;
         public bool IsInit
@@ -21,8 +24,6 @@ namespace HexaEditor
             get { return isInit; }
             set { isInit = value; }
         }
-
-        
 
         // Contient les informations relatives au fichier de référence
         private Dictionary<string, string> fileInfos;
@@ -116,7 +117,6 @@ namespace HexaEditor
                 getFileInfos();
             }
         }
-
         /// <summary>
         /// Met à jour le dictionaire fileinfo avec les informations du reader
         /// </summary>
@@ -128,12 +128,10 @@ namespace HexaEditor
             this.FileInfos.Add("Length", this.fileReader.getFileLength());
             this.FileInfos.Add("LastAccess", this.fileReader.getLastAccess());
         }
-
         public ulong getCaseByPage(ulong theCase)
         {
             return theCase + this.page * PAGECAPACITY;
         }
-
         /// <summary>
         /// Donne un tableau du nombre de valeur correspondant à la constante PAGECAPACITY, en fonction de la variable page
         /// </summary>
@@ -164,7 +162,6 @@ namespace HexaEditor
             }
             return values;
         }
-
         /// <summary>
         /// DOnne un tableau du nombre de valeur corrrespondant à la constante PAGECAPACITY, au format ASCII
         /// </summary>
@@ -203,7 +200,6 @@ namespace HexaEditor
 
             return ASCIIpage;
         }
-
         /// <summary>
         /// Revoie la page modifiée par l'utilisateur au reader
         /// </summary>
@@ -219,6 +215,9 @@ namespace HexaEditor
             }
 
             fileReader.updatePseudoPage(values, PAGECAPACITY * page);
+            fileReader.addStates(this.internalStates);
+            this.internalStates = new Stack<string>();
+
         }
         /// <summary>
         /// Ordonne au reader de sauver son contenu actuel à son emplacement de référence
@@ -226,6 +225,35 @@ namespace HexaEditor
         public void saveFIle()
         {
             this.fileReader.writeData();
+        }
+        /// <summary>
+        /// Annule la dernière modifiction dans le Reader, renvoie sur la page de la dernière modification 
+        /// </summary>
+        /// <returns>position de la dernière modification sur la page</returns>
+        public string undo()
+        {
+            if (this.internalStates.Count != 0)
+            {
+                ulong changeId = this.fileReader.previousState();
+                if (changeId != 0)
+                {
+                    this.Page = changeId / PAGECAPACITY;
+                    return (changeId % PAGECAPACITY).ToString();
+                }
+                else
+                {
+                    return "-1";
+                }
+            }
+            else
+            {
+                return internalStates.Pop();
+            }
+        }
+        public void addState(char value, int position)
+        {
+            string code = value + position.ToString();
+            this.internalStates.Push(code);
         }
 
         // CONVERTING FUNCTIONS \\
