@@ -334,7 +334,13 @@ namespace HexaEditor
         /// <returns></returns>
         public string getFloat(ulong position)
         {
-            return string.Empty;
+            string s = "67";
+            uint number = uint.Parse(s, System.Globalization.NumberStyles.AllowHexSpecifier);
+
+            byte[] floatvalue = BitConverter.GetBytes(number);
+            float fn = BitConverter.ToSingle(floatvalue, 0);
+          
+            return fn.ToString();
         }
         /// <summary>
         /// Retourne la valeur d'un décimal sur 64 bits
@@ -516,7 +522,7 @@ namespace HexaEditor
             {
                 for (int x = 0; x < valuesX; x++)
                 {
-                    Brush pinceau = Brushes.Black; 
+                    Brush pinceau = Brushes.Black;
 
                     output = values[y * 16 + x];
 
