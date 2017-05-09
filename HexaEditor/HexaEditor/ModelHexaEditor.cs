@@ -215,7 +215,7 @@ namespace HexaEditor
             }
 
             fileReader.updatePseudoPage(values, PAGECAPACITY * page);
-            fileReader.addStates(this.internalStates);
+            //fileReader.addStates(this.internalStates);
             this.internalStates = new Stack<string>();
 
         }

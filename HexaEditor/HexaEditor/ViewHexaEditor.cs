@@ -215,17 +215,11 @@ namespace HexaEditor
                         break;
                 }
 
-                /* If the cell is out of range
-                if (SelectedCase < 0 || SelectedCase > values.Length - 1)
-                {
-                    SelectedCase = t_selectedCase;
-                    move = false;
-                }*/
-
                 if (move)
                 {
                     completeSelectedCase();
                     this.SelectedCase = t_selectedCase;
+                    // Refresh pbx
                     RefreshLabels();
                     pbxOutput.Invalidate();
                     pbxAscii.Invalidate();
@@ -233,7 +227,7 @@ namespace HexaEditor
 
                 Debug.Print(SelectedCase.ToString());
 
-                // Refresh pbx
+                
                 
             }
         }
