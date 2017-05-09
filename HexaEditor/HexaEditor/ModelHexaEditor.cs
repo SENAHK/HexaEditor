@@ -92,6 +92,7 @@ namespace HexaEditor
 
         public ModelHexaEditor()
         {
+            this.internalStates = new Stack<string>();
             this.IsInit = false;
             this.page = 0;
         }
@@ -215,7 +216,7 @@ namespace HexaEditor
             }
 
             fileReader.updatePseudoPage(values, PAGECAPACITY * page);
-            //fileReader.addStates(this.internalStates);
+            fileReader.addStates(this.internalStates);
             this.internalStates = new Stack<string>();
 
         }
@@ -232,7 +233,7 @@ namespace HexaEditor
         /// <returns>position de la dernière modification sur la page</returns>
         public string undo()
         {
-            if (this.internalStates.Count != 0)
+            if (this.internalStates.Count == 0)
             {
                 ulong changeId = this.fileReader.previousState();
                 if (changeId != 0)

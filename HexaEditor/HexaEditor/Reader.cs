@@ -76,6 +76,7 @@ namespace HexaEditor
                 this.IsEmpty = false;
                 this.InfoFile = new FileInfo(paramPath);
                 this.OpenDate = DateTime.Now.ToString();
+                this._states = new Stack<string>();
             }
             else
             {

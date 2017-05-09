@@ -73,10 +73,10 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.lblPage = new System.Windows.Forms.Label();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ofdOpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.lblPage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOutput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAscii)).BeginInit();
             this.tbcData.SuspendLayout();
@@ -523,28 +523,16 @@
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(115, 22);
             this.tsmiOpen.Text = "Open ...";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
             // tsmiSave
             // 
             this.tsmiSave.Name = "tsmiSave";
-            this.tsmiSave.Size = new System.Drawing.Size(152, 22);
+            this.tsmiSave.Size = new System.Drawing.Size(115, 22);
             this.tsmiSave.Text = "Save";
             this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
-            // 
-            // ofdOpenFile
-            // 
-            this.ofdOpenFile.FileName = "openFileDialog1";
-            // 
-            // lblPage
-            // 
-            this.lblPage.Location = new System.Drawing.Point(259, 496);
-            this.lblPage.Name = "lblPage";
-            this.lblPage.Size = new System.Drawing.Size(463, 23);
-            this.lblPage.TabIndex = 10000;
-            this.lblPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // editToolStripMenuItem
             // 
@@ -559,6 +547,19 @@
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            // 
+            // ofdOpenFile
+            // 
+            this.ofdOpenFile.FileName = "openFileDialog1";
+            // 
+            // lblPage
+            // 
+            this.lblPage.Location = new System.Drawing.Point(259, 496);
+            this.lblPage.Name = "lblPage";
+            this.lblPage.Size = new System.Drawing.Size(463, 23);
+            this.lblPage.TabIndex = 10000;
+            this.lblPage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ViewHexaEditor
             // 

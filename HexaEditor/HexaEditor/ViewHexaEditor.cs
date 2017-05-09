@@ -133,7 +133,6 @@ namespace HexaEditor
         {
             if (Model.IsInit)
             {
-
                 selectCase(this.Model.Cases, this.values, e);
             }
         }
@@ -158,6 +157,7 @@ namespace HexaEditor
         public void selectCase(List<Rectangle> rectanglesToFill, string[] values, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            Debug.Print(SelectedCase.ToString());
             string c = values[SelectedCase];
             Brush b = Brushes.White;
             if (this.Model.CharIsNotPrintable(c))
@@ -350,15 +350,15 @@ namespace HexaEditor
         /// <param name="value">caractère ascii</param>
         public void WriteFromAscii(char value, bool saveState)
         {
+            if (saveState)
+            {
+                this.Model.addState(Convert.ToChar(this.asciiValues[this.SelectedCase]), this.SelectedCase);
+
+            }
             this.asciiValues[this.SelectedCase] = value.ToString();
 
             string hexa = Convert.ToString(Convert.ToByte(value), 16);
             this.values[this.SelectedCase] = hexa.ToUpper();
-
-            /*if (saveState)
-            {
-                this.Model.addState(value, this.SelectedCase);
-            }*/
 
             RefreshOutput();
         }
@@ -369,6 +369,9 @@ namespace HexaEditor
         /// <param name="value"></param>
         public void WriteFromHexa(char value)
         {
+
+            this.Model.addState(Convert.ToChar(this.asciiValues[this.SelectedCase]), this.SelectedCase);
+
             string reff = this.values[this.SelectedCase];
 
             if (reff.Length == 1)
@@ -383,7 +386,7 @@ namespace HexaEditor
             byte numericVal = Convert.ToByte(Convert.ToInt32(this.values[this.SelectedCase], 16));
             this.asciiValues[this.SelectedCase] = ((char)numericVal).ToString();
 
-            //this.Model.addState(Convert.ToChar(numericVal), this.SelectedCase);
+            
 
             RefreshOutput();
         }
@@ -415,6 +418,11 @@ namespace HexaEditor
                 this.SelectedCase = stateID;
                 this.WriteFromAscii(Convert.ToChar(stateValue), false);
             }
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.undo();
         }
     }
 }
