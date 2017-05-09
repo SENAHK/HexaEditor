@@ -220,9 +220,8 @@ namespace HexaEditor
                     completeSelectedCase();
                     this.SelectedCase = t_selectedCase;
                     // Refresh pbx
+                    RefreshOutput();
                     RefreshLabels();
-                    pbxOutput.Invalidate();
-                    pbxAscii.Invalidate();
                 }
 
                 Debug.Print(SelectedCase.ToString());
@@ -249,7 +248,7 @@ namespace HexaEditor
         public void RefreshLabels()
         {
             // Case dans le tableau
-            ulong theCase = this.Model.getCaseByPage((ulong)SelectedCase);
+            ulong theCase = this.Model.getCaseByPage((ulong)this.SelectedCase);
 
             lblPage.Text = String.Format("Page {0} sur {1}", this.Model.Page + 1, this.Model.TotalPages + 1);
             lblFileName.Text = Model.FileInfos["Name"];
@@ -258,14 +257,24 @@ namespace HexaEditor
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
 
+            string valueToProcess = this.values[this.SelectedCase];
+           
             lblBin.Text = Model.getBinary((ulong)theCase);
             lblOctal.Text = Model.getOctal((ulong)theCase);
-            lbl8s.Text = Model.getSByte((ulong)theCase);
-            lbl8ns.Text = Model.getByte((ulong)theCase);
-            lbl16s.Text = Model.getInt16((ulong)theCase);
-            lbl16ns.Text = Model.getUint16((ulong)theCase);
-            lbl32s.Text = Model.getInt32((ulong)theCase);
+
+            // 8
+            lbl8s.Text = Model.getSByte(valueToProcess);
+            lbl8ns.Text = Model.getByte(valueToProcess);
+
+            // 16
+            lbl16s.Text = Model.getInt16(valueToProcess);
+            lbl16ns.Text = Model.getUint16(valueToProcess);
+
+            //32
+            lbl32s.Text = Model.getInt32(valueToProcess);
             //lbl32ns.Text = Model.get((ulong)SelectedCase);
+
+            // 64 +
             lbl64.Text = Model.getInt64((ulong)theCase);
             lblDouble.Text = Model.getDouble((ulong)theCase);
             lblFloat.Text = Model.getFloat((ulong)theCase);

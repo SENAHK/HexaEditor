@@ -262,29 +262,32 @@ namespace HexaEditor
         /// <summary>
         /// Retourne la valeur d'un entier non signé de 8 bit
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="val"></param>
         /// <returns></returns>
-        public string getByte(ulong position)
+        public string getByte(string val)
         {
-            return fileReader.GetValue(position).ToString();
+            Byte b = Convert.ToByte(Convert.ToInt32(val, 16));
+            return b.ToString();
         }
         /// <summary>
         /// Retourne la valeur d'un entier signé de 8 bits
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="val"></param>
         /// <returns></returns>
-        public string getSByte(ulong position)
+        public string getSByte(string val)
         {
-            return ((sbyte)fileReader.GetValue(position)).ToString();
+            Byte b = Convert.ToByte(Convert.ToInt32(val, 16));
+            return ((sbyte)b).ToString();
         }
         /// <summary>
         /// Retourne la valeur d'un entier non signé de 16 bits
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getInt16(ulong position)
+        public string getInt16(string val)
         {
-            string binary = Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            byte b = Convert.ToByte(Convert.ToInt32(val, 16));
+            string binary = Convert.ToString(b, 2).PadLeft(8, '0');
             string binary16 = binary + "00000000";
             return (Convert.ToUInt16(binary16, 2)).ToString();
         }
@@ -293,9 +296,10 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getUint16(ulong position)
+        public string getUint16(string val)
         {
-            string binary = Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            byte b = Convert.ToByte(Convert.ToInt32(val, 16));
+            string binary = Convert.ToString(b, 2).PadLeft(8, '0');
             string binary16 = binary + "00000000";
             return (Convert.ToUInt16(binary16, 2)).ToString();
         }
@@ -304,9 +308,10 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getInt32(ulong position)
+        public string getInt32(string val)
         {
-            string binary = Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            byte b = Convert.ToByte(Convert.ToInt32(val, 16));
+            string binary = Convert.ToString(b, 2).PadLeft(8, '0');
             string binary32 = binary + "00000000" + "00000000" + "00000000";
             return (Convert.ToInt32(binary32, 2)).ToString();
         }
