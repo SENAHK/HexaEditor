@@ -210,7 +210,16 @@ namespace HexaEditor
                             move = true;
                         }
                         break;
-
+                    case (Keys.Control | Keys.Z):
+                        {
+                            undo();
+                        }
+                        break;
+                    case (Keys.Control | Keys.S):
+                        {
+                            tsmiSave.PerformClick();
+                        }
+                        break;
                     default:
                         break;
                 }
