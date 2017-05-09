@@ -23,7 +23,7 @@ namespace HexaEditor
 
     public partial class ViewHexaEditor : Form
     {
-        
+
         private ModelHexaEditor _model;
         private int _selectedCase;
         private const int ARRAY_WIDTH = 16;
@@ -183,14 +183,14 @@ namespace HexaEditor
                 switch (e.KeyData)
                 {
                     case Keys.Right:
-                        if (SelectedCase+1 < values.Length)
+                        if (SelectedCase + 1 < values.Length)
                         {
                             t_selectedCase += 1;
                             move = true;
                         }
                         break;
                     case Keys.Down:
-                        if (SelectedCase+16 < values.Length)
+                        if (SelectedCase + 16 < values.Length)
                         {
                             t_selectedCase += 16;
                             move = true;
@@ -210,16 +210,6 @@ namespace HexaEditor
                             move = true;
                         }
                         break;
-                    case (Keys.Control | Keys.Z):
-                        {
-                            undo();
-                        }
-                        break;
-                    case (Keys.Control | Keys.S):
-                        {
-                            tsmiSave.PerformClick();
-                        }
-                        break;
                     default:
                         break;
                 }
@@ -234,10 +224,8 @@ namespace HexaEditor
                 }
 
                 Debug.Print(SelectedCase.ToString());
-
-                
-                
             }
+
         }
         /// <summary>
         /// Ne marche pas
@@ -267,7 +255,7 @@ namespace HexaEditor
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
 
             string valueToProcess = this.values[this.SelectedCase];
-           
+
             lblBin.Text = Model.getBinary((ulong)theCase);
             lblOctal.Text = Model.getOctal((ulong)theCase);
 
@@ -308,7 +296,7 @@ namespace HexaEditor
         {
             // Remove the default behaviour that allows navigating in the tabs with the arrow keys
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
-                e.Handled = true;             
+                e.Handled = true;
         }
         /// <summary>
         /// Onglet save du menu
@@ -404,7 +392,7 @@ namespace HexaEditor
             byte numericVal = Convert.ToByte(Convert.ToInt32(this.values[this.SelectedCase], 16));
             this.asciiValues[this.SelectedCase] = ((char)numericVal).ToString();
 
-            
+
 
             RefreshOutput();
         }
@@ -413,28 +401,31 @@ namespace HexaEditor
         /// </summary>
         public void undo()
         {
-            string result = Model.undo();
-            int cursor;
-            if (int.TryParse(result, out cursor))
+            if (this.Model.IsInit)
             {
-                if (cursor != -1)
+                string result = Model.undo();
+                int cursor;
+                if (int.TryParse(result, out cursor))
                 {
-                    this.values = Model.getPageContent();
-                    this.asciiValues = Model.getASCIIpage();
-                    this.SelectedCase = cursor;
-                    this.RefreshOutput();
-                    this.RefreshLabels();
+                    if (cursor != -1)
+                    {
+                        this.values = Model.getPageContent();
+                        this.asciiValues = Model.getASCIIpage();
+                        this.SelectedCase = cursor;
+                        this.RefreshOutput();
+                        this.RefreshLabels();
+                    }
                 }
-            }
-            else
-            {
-                byte stateValue = Convert.ToByte(result[0]);
-                char[] tmpID = new char[result.Length - 1];
-                Array.Copy(result.ToCharArray(), 1, tmpID, 0, result.Length - 1);
-                int stateID = Convert.ToInt32(new string(tmpID));
+                else
+                {
+                    byte stateValue = Convert.ToByte(result[0]);
+                    char[] tmpID = new char[result.Length - 1];
+                    Array.Copy(result.ToCharArray(), 1, tmpID, 0, result.Length - 1);
+                    int stateID = Convert.ToInt32(new string(tmpID));
 
-                this.SelectedCase = stateID;
-                this.WriteFromAscii(Convert.ToChar(stateValue), false);
+                    this.SelectedCase = stateID;
+                    this.WriteFromAscii(Convert.ToChar(stateValue), false);
+                }
             }
         }
 
