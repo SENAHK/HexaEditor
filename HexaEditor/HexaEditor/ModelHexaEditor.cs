@@ -186,7 +186,7 @@ namespace HexaEditor
 
             for (ulong i = start; i < stop; i++)
             {
-                char c = this.getASCII(i);
+                char c = (char)fileReader.GetValue(i);
                 if (c == (char)0)
                 {
                     ASCIIpage[count] = ".";
@@ -264,7 +264,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public string getByte(string val)
+        /*OK*/public string getByte(string val)
         {
             Byte b = Convert.ToByte(Convert.ToInt32(val, 16));
             return b.ToString();
@@ -274,7 +274,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public string getSByte(string val)
+        /*OK*/public string getSByte(string val)
         {
             Byte b = Convert.ToByte(Convert.ToInt32(val, 16));
             return ((sbyte)b).ToString();
@@ -284,91 +284,187 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getInt16(string val)
+        /*OK*/public string getInt16(List<string> val, int id)
         {
-            byte b = Convert.ToByte(Convert.ToInt32(val, 16));
-            string binary = Convert.ToString(b, 2).PadLeft(8, '0');
-            string binary16 = binary + "00000000";
-            return (Convert.ToUInt16(binary16, 2)).ToString();
-        }
+            int b = Convert.ToInt32(val[0], 16) << 8;
+            if (val.Count > 1)
+            {
+                b += Convert.ToInt32(val[1], 16);
+            }   
+            else
+            {
+                if ((ulong)((int)this.page*(int)PAGECAPACITY + id + 1) < fileReader.Length)
+                {
+                    b += fileReader.GetValue((ulong)((int)this.page * (int)PAGECAPACITY + id));
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+            return ((Int16)(b)).ToString();
+        } 
         /// <summary>
         /// Retourne la valeur d'un entier non signé de 16 bits
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getUint16(string val)
+        /*OK*/public string getUint16(List<string> val, int id)
         {
-            byte b = Convert.ToByte(Convert.ToInt32(val, 16));
-            string binary = Convert.ToString(b, 2).PadLeft(8, '0');
-            string binary16 = binary + "00000000";
-            return (Convert.ToUInt16(binary16, 2)).ToString();
+            int b = Convert.ToInt32(val[0], 16) << 8;
+            if (val.Count > 1)
+            {
+                b += Convert.ToInt32(val[1], 16);
+            }
+
+            else
+            {
+                if ((ulong)((int)this.page * (int)PAGECAPACITY + id + 1) < fileReader.Length)
+                {
+                    b += fileReader.GetValue((ulong)((int)this.page * (int)PAGECAPACITY + id + 1));
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+            return ((UInt16)(b)).ToString();
         }
         /// <summary>
         /// Retourne la valeur d'un entier signé de 23 bits
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getInt32(string val)
+        /*OK*/public string getInt32(List<string> val, int id)
         {
-            byte b = Convert.ToByte(Convert.ToInt32(val, 16));
-            string binary = Convert.ToString(b, 2).PadLeft(8, '0');
-            string binary32 = binary + "00000000" + "00000000" + "00000000";
-            return (Convert.ToInt32(binary32, 2)).ToString();
+            int b = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (val.Count > i)
+                {
+                    b += Convert.ToInt32(val[i], 16) << (3-i)*8;
+                }
+                else
+                {
+                    if ((ulong)((int)this.page * (int)PAGECAPACITY + id + i) < fileReader.Length)
+                    {
+                        b += fileReader.GetValue((ulong)((int)this.page * (int)PAGECAPACITY + id + i)) << (3 - i) * 8;
+                    }
+                    else
+                    {
+                        return "-";
+                    }
+                }
+            }
+            return b.ToString();
+        }
+
+        /*OK*/public string getUInt32(List<string> val, int id)
+        {
+            int b = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (val.Count > i)
+                {
+                    b += Convert.ToInt32(val[i], 16) << (3 - i) * 8;
+                }
+                else
+                {
+                    if ((ulong)((int)this.page * (int)PAGECAPACITY + id + i) < fileReader.Length)
+                    {
+                        b += fileReader.GetValue((ulong)((int)this.page * (int)PAGECAPACITY + id + i)) << (3 - i) * 8;
+                    }
+                    else
+                    {
+                        return "-";
+                    }
+                }
+            }
+            return ((UInt32)(b)).ToString();
         }
         /// Retourne la valeur d'un entier signé de 64 bits
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getInt64(ulong position)
+        /*OK*/public string getInt64(List<string> val, int id)
         {
-            return ((long)(fileReader.GetValue(position) * 72057594037927936)).ToString();
+            long b = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                if (val.Count > i)
+                {
+                    b += Convert.ToInt32(val[i], 16) << (7 - i) * 8;
+                }
+                else
+                {
+                    if ((ulong)((int)this.page * (int)PAGECAPACITY + id + i) < fileReader.Length)
+                    {
+                        b += fileReader.GetValue((ulong)((int)this.page * (int)PAGECAPACITY + id + i)) << (7 - i) * 8;
+                    }
+                    else
+                    {
+                        return "-";
+                    }
+                }
+            }
+            return (b).ToString();
         }
         /// <summary>
         /// Retourne la valeur binaire
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getBinary(ulong position)
+        /*OK*/public string getBinary(string val)
         {
-            return Convert.ToString(fileReader.GetValue(position), 2).PadLeft(8, '0');
+            return Convert.ToString(Convert.ToInt32(val, 16), 2).PadLeft(8, '0');
         }
         /// <summary>
         /// Retourne la valeur d'un décimal sur 32 bits
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getFloat(ulong position)
+        /*?*/public string getFloat(List<string> val, int id)
         {
-            string s = "67";
+            /*string s = Convert.ToString(Convert.ToInt64(this.getInt64(val, id)), 16);
+            MessageBox.Show(s);
             uint number = uint.Parse(s, System.Globalization.NumberStyles.AllowHexSpecifier);
 
             byte[] floatvalue = BitConverter.GetBytes(number);
-            float fn = BitConverter.ToSingle(floatvalue, 0);
-          
-            return fn.ToString();
+            float fn = BitConverter.ToSingle(floatvalue, 0);*/
+
+            return "-";
+            //return fn.ToString();
         }
         /// <summary>
         /// Retourne la valeur d'un décimal sur 64 bits
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getDouble(ulong position)
+        /*Non numerique ?*/public string getDouble(List<string> val, int id)
         {
-            byte[] c = new byte[8];
-            c[0] = fileReader.GetValue(position);
-            for (int i = 1; i < c.Length; i++)
+            string longuet = this.getInt64(val, id);
+            if (longuet == "-")
             {
-                c[i] = 0;
+                return longuet;
             }
-            double d = BitConverter.ToDouble(c, 0);
-            return d.ToString();
+            else
+            {
+                byte[] c = BitConverter.GetBytes(Convert.ToInt64(this.getInt64(val, id)));
+                /*c[0] = fileReader.GetValue(position);
+                for (int i = 1; i < c.Length; i++)
+                {
+                    c[i] = 0;
+                }*/
+                double d = BitConverter.ToDouble(c, 0);
+                return d.ToString();
+            }
         }
         /// <summary>
         /// Retourne le caractère correspondant au code ASCII donnéS
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public char getASCII(ulong position)
+        /*OK*/public char getASCII(string val)
         {
             // Positions inutilisées (ISO 8859-1)
             // 0x00 à 0x1F et 0x7F à 0x9F en décimal
@@ -378,7 +474,7 @@ namespace HexaEditor
             int max_0x9F = 159;
 
             // Valeur décimale du byte
-            int c = (int)fileReader.GetValue(position);
+            int c = Convert.ToInt32(val, 16);
 
             if ((c >= min_0x && c <= max_1x) || (c >= min_0x7F && c <= max_0x9F))
             {
@@ -394,9 +490,9 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public string getOctal(ulong position)
+        /*OK*/public string getOctal(string val)
         {
-            return Convert.ToString(fileReader.GetValue(position), 8);
+            return Convert.ToString(Convert.ToInt32(val, 16), 8);
         }
         /// <summary>
         /// CharIsNotPrintable permet de savoir si c correspond au caractère non utilisé

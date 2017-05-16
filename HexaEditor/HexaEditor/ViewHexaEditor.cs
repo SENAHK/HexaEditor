@@ -253,31 +253,44 @@ namespace HexaEditor
             lblCreationDate.Text = Model.FileInfos["CreationDate"];
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
-
             string valueToProcess = this.values[this.SelectedCase];
+            List<string> valuesToProcess = new List<string>(); 
 
-            lblBin.Text = Model.getBinary((ulong)theCase);
-            lblOctal.Text = Model.getOctal((ulong)theCase);
+            lblBin.Text = Model.getBinary(valueToProcess);
+            lblOctal.Text = Model.getOctal(valueToProcess);
 
             // 8
             lbl8s.Text = Model.getSByte(valueToProcess);
             lbl8ns.Text = Model.getByte(valueToProcess);
 
             // 16
-            lbl16s.Text = Model.getInt16(valueToProcess);
-            lbl16ns.Text = Model.getUint16(valueToProcess);
+            for (int i = SelectedCase; i < values.Length && i < SelectedCase+2; i++)
+            {
+                valuesToProcess.Add(this.values[i]);
+            }
+            lbl16s.Text = Model.getInt16(valuesToProcess, this.SelectedCase);
+            lbl16ns.Text = Model.getUint16(valuesToProcess, this.SelectedCase);
 
             //32
-            lbl32s.Text = Model.getInt32(valueToProcess);
+            for (int i = SelectedCase+2; i < values.Length && i < SelectedCase+4; i++)
+            {
+                valuesToProcess.Add(this.values[i]);
+            }
+            lbl32s.Text = Model.getInt32(valuesToProcess, this.SelectedCase);
+            lbl32ns.Text = Model.getUInt32(valuesToProcess, this.SelectedCase);
             //lbl32ns.Text = Model.get((ulong)SelectedCase);
 
             // 64 +
-            lbl64.Text = Model.getInt64((ulong)theCase);
-            lblDouble.Text = Model.getDouble((ulong)theCase);
-            lblFloat.Text = Model.getFloat((ulong)theCase);
+            for (int i = SelectedCase + 4; i < values.Length && i < SelectedCase + 8; i++)
+            {
+                valuesToProcess.Add(this.values[i]);
+            }
+            lbl64.Text = Model.getInt64(valuesToProcess, this.SelectedCase);
+            lblDouble.Text = Model.getDouble(valuesToProcess, this.SelectedCase);
+            lblFloat.Text = Model.getFloat(valuesToProcess, this.SelectedCase);
 
             // Ascii value
-            string c = Model.getASCII((ulong)theCase).ToString();
+            string c = Model.getASCII(valueToProcess).ToString();
             lblChar.Text = this.Model.CharIsNotPrintable(c) ? " " : c;
 
         }
