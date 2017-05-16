@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * AUTEURS: Serena SADEK & Michael Ramusi
+ * CLASSE: I.FA-P3A
+ * APPLICATION: HexaEditor
+ * DESCRIPTION: Lecture / écriture en format hexa et ascii d'un fichier
+ * DATE: 2ème semestre 2016-2017
+ * */
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * AUTEURS: Serena SADEK & Michael Ramusi
+ * CLASSE: I.FA-P3A
+ * APPLICATION: HexaEditor
+ * DESCRIPTION: Lecture / écriture en format hexa et ascii d'un fichier
+ * DATE: 2ème semestre 2016-2017
+ * */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,16 +18,6 @@ using System.Windows.Forms;
 
 namespace HexaEditor
 {
-    /*
-     * BUG
-     * Il faut revoir la génération du tableau, car en réinjectant les donnnées dans le reader
-     * on le fait avec la taille du tableau. Il faudrait revoir la génération dans la textbox
-     * pour faire en sorte qu'elle conserve le ratio de largeur et de hauteur mais s'arrête à 
-     * la fin tu tableau (qu'on ne force pas à avoir la taille de la page)
-     * 
-     *  ++ J'ai besoin d'une variable avec la position du curseur pour modifier l'interieur des cases
-     */
-
     public partial class ViewHexaEditor : Form
     {
 
@@ -254,7 +251,7 @@ namespace HexaEditor
             lblModificationDate.Text = Model.FileInfos["ModificationDate"];
             lblFileLastAccess.Text = Model.FileInfos["LastAccess"];
             string valueToProcess = this.values[this.SelectedCase];
-            List<string> valuesToProcess = new List<string>(); 
+            List<string> valuesToProcess = new List<string>();
 
             lblBin.Text = Model.getBinary(valueToProcess);
             lblOctal.Text = Model.getOctal(valueToProcess);
@@ -264,7 +261,7 @@ namespace HexaEditor
             lbl8ns.Text = Model.getByte(valueToProcess);
 
             // 16
-            for (int i = SelectedCase; i < values.Length && i < SelectedCase+2; i++)
+            for (int i = SelectedCase; i < values.Length && i < SelectedCase + 2; i++)
             {
                 valuesToProcess.Add(this.values[i]);
             }
@@ -272,7 +269,7 @@ namespace HexaEditor
             lbl16ns.Text = Model.getUint16(valuesToProcess, this.SelectedCase);
 
             //32
-            for (int i = SelectedCase+2; i < values.Length && i < SelectedCase+4; i++)
+            for (int i = SelectedCase + 2; i < values.Length && i < SelectedCase + 4; i++)
             {
                 valuesToProcess.Add(this.values[i]);
             }
@@ -434,7 +431,7 @@ namespace HexaEditor
                 }
                 else
                 {
-                    string stateValue = (result[0] + result[1]).ToString() ;
+                    string stateValue = (result[0] + result[1]).ToString();
                     char[] tmpID = new char[result.Length - 2];
                     Array.Copy(result.ToCharArray(), 2, tmpID, 0, result.Length - 2);
                     int stateID = Convert.ToInt32(new string(tmpID));
