@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="HexaEditor.ModelHexaEditor">
+    <Position X="0.5" Y="0.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>ICIoWwgEAAAQUIQgEAYAICIEACEEAAAiEEAAUAJABII=</HashCode>
+      <FileName>ModelHexaEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HexaEditor.Reader">
+    <Position X="0.5" Y="10.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>EUBYIAEAJAAKEIIAAAAAAGBAAAAICBAABBAEBAACAgA=</HashCode>
+      <FileName>Reader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HexaEditor.ViewHexaEditor">
+    <Position X="0.5" Y="17.5" Width="5.25" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="editToolStripMenuItem" Hidden="true" />
+      <Field Name="fileToolStripMenuItem" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="lbl16s" Hidden="true" />
+      <Field Name="lbl32ns" Hidden="true" />
+      <Field Name="lbl32s" Hidden="true" />
+      <Field Name="lbl64" Hidden="true" />
+      <Field Name="lbl8ns" Hidden="true" />
+      <Field Name="lbl8s" Hidden="true" />
+      <Field Name="lblAscii" Hidden="true" />
+      <Field Name="lblBin" Hidden="true" />
+      <Field Name="lblChar" Hidden="true" />
+      <Field Name="lblCreationDate" Hidden="true" />
+      <Field Name="lblDouble" Hidden="true" />
+      <Field Name="lblFileLastAccess" Hidden="true" />
+      <Field Name="lblFileName" Hidden="true" />
+      <Field Name="lblFileSize" Hidden="true" />
+      <Field Name="lblFloat" Hidden="true" />
+      <Field Name="lblHexa" Hidden="true" />
+      <Field Name="lblModificationDate" Hidden="true" />
+      <Field Name="lblOctal" Hidden="true" />
+      <Field Name="lblPage" Hidden="true" />
+      <Field Name="lblTitbleByte" Hidden="true" />
+      <Field Name="LblTitleBinary" Hidden="true" />
+      <Field Name="lblTitleChar" Hidden="true" />
+      <Field Name="lblTitleCreationDate" Hidden="true" />
+      <Field Name="lblTitleDouble" Hidden="true" />
+      <Field Name="lblTitleFloat" Hidden="true" />
+      <Field Name="lblTitleInt16" Hidden="true" />
+      <Field Name="lblTitleInt32" Hidden="true" />
+      <Field Name="lblTitleLastAccess" Hidden="true" />
+      <Field Name="lblTitleLong" Hidden="true" />
+      <Field Name="lblTitleModDate" Hidden="true" />
+      <Field Name="lblTitleName" Hidden="true" />
+      <Field Name="lblTitleOctal" Hidden="true" />
+      <Field Name="lblTitleSByte" Hidden="true" />
+      <Field Name="lblTitleSize" Hidden="true" />
+      <Field Name="lblTitleUint16" Hidden="true" />
+      <Field Name="lblTitleUint32" Hidden="true" />
+      <Field Name="msMenu" Hidden="true" />
+      <Field Name="ofdOpenFile" Hidden="true" />
+      <Field Name="pbxAscii" Hidden="true" />
+      <Field Name="pbxOutput" Hidden="true" />
+      <Field Name="tbcData" Hidden="true" />
+      <Field Name="tbDataReader" Hidden="true" />
+      <Field Name="tbDetails" Hidden="true" />
+      <Field Name="tsmiOpen" Hidden="true" />
+      <Field Name="tsmiSave" Hidden="true" />
+      <Field Name="undoToolStripMenuItem" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>NqEAEEAmIuMIGAggApKKiAQKIQQBQCgCIMrFdA/hoIs=</HashCode>
+      <FileName>ViewHexaEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
