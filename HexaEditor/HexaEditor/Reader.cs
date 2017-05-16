@@ -216,9 +216,9 @@ namespace HexaEditor
             if (this.States.Count > 0)
             {
                 string stateCode = States.Pop();
-                byte stateValue = Convert.ToByte(stateCode[0]);
-                char[] tmpID = new char[stateCode.Length - 1];
-                Array.Copy(stateCode.ToCharArray(), 1, tmpID, 0, stateCode.Length - 1);
+                byte stateValue = (byte)Convert.ToInt32((stateCode[0]+stateCode[1]).ToString(), 16);
+                char[] tmpID = new char[stateCode.Length - 2];
+                Array.Copy(stateCode.ToCharArray(), 2, tmpID, 0, stateCode.Length - 2);
                 ulong stateID = (ulong)Convert.ToInt64(new string(tmpID));
 
                 Data[stateID] = stateValue;

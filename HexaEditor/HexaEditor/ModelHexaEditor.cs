@@ -251,7 +251,7 @@ namespace HexaEditor
                 return internalStates.Pop();
             }
         }
-        public void addState(char value, int position)
+        public void addState(string value, int position)
         {
             string code = value + position.ToString();
             this.internalStates.Push(code);
@@ -264,7 +264,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        /*OK*/public string getByte(string val)
+        public string getByte(string val)
         {
             Byte b = Convert.ToByte(Convert.ToInt32(val, 16));
             return b.ToString();
@@ -274,7 +274,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        /*OK*/public string getSByte(string val)
+        public string getSByte(string val)
         {
             Byte b = Convert.ToByte(Convert.ToInt32(val, 16));
             return ((sbyte)b).ToString();
@@ -284,7 +284,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public string getInt16(List<string> val, int id)
+        public string getInt16(List<string> val, int id)
         {
             int b = Convert.ToInt32(val[0], 16) << 8;
             if (val.Count > 1)
@@ -309,7 +309,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public string getUint16(List<string> val, int id)
+        public string getUint16(List<string> val, int id)
         {
             int b = Convert.ToInt32(val[0], 16) << 8;
             if (val.Count > 1)
@@ -335,7 +335,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public string getInt32(List<string> val, int id)
+        public string getInt32(List<string> val, int id)
         {
             int b = 0;
             for (int i = 0; i < 4; i++)
@@ -359,7 +359,7 @@ namespace HexaEditor
             return b.ToString();
         }
 
-        /*OK*/public string getUInt32(List<string> val, int id)
+        public string getUInt32(List<string> val, int id)
         {
             int b = 0;
             for (int i = 0; i < 4; i++)
@@ -386,7 +386,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public string getInt64(List<string> val, int id)
+        public string getInt64(List<string> val, int id)
         {
             long b = 0;
             for (int i = 0; i < 8; i++)
@@ -414,7 +414,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public string getBinary(string val)
+        public string getBinary(string val)
         {
             return Convert.ToString(Convert.ToInt32(val, 16), 2).PadLeft(8, '0');
         }
@@ -423,7 +423,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*?*/public string getFloat(List<string> val, int id)
+        public string getFloat(List<string> val, int id)
         {
             /*string s = Convert.ToString(Convert.ToInt64(this.getInt64(val, id)), 16);
             MessageBox.Show(s);
@@ -440,7 +440,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*Non numerique ?*/public string getDouble(List<string> val, int id)
+        public string getDouble(List<string> val, int id)
         {
             string longuet = this.getInt64(val, id);
             if (longuet == "-")
@@ -464,7 +464,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public char getASCII(string val)
+        public char getASCII(string val)
         {
             // Positions inutilisées (ISO 8859-1)
             // 0x00 à 0x1F et 0x7F à 0x9F en décimal
@@ -490,7 +490,7 @@ namespace HexaEditor
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        /*OK*/public string getOctal(string val)
+        public string getOctal(string val)
         {
             return Convert.ToString(Convert.ToInt32(val, 16), 8);
         }

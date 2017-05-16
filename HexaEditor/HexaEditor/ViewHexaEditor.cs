@@ -354,7 +354,7 @@ namespace HexaEditor
                     e.KeyChar = Convert.ToChar(e.KeyChar.ToString().ToUpper());
                     if (char.IsNumber(e.KeyChar) || e.KeyChar == 'A' || e.KeyChar == 'B' || e.KeyChar == 'C' || e.KeyChar == 'D' || e.KeyChar == 'F')
                     {
-                        WriteFromHexa(e.KeyChar);
+                        WriteFromHexa(e.KeyChar, true);
                     }
                 }
                 else
@@ -371,7 +371,7 @@ namespace HexaEditor
         {
             if (saveState)
             {
-                this.Model.addState(Convert.ToChar(this.asciiValues[this.SelectedCase]), this.SelectedCase);
+                this.Model.addState(this.values[this.SelectedCase], this.SelectedCase);
 
             }
             this.asciiValues[this.SelectedCase] = value.ToString();
@@ -386,10 +386,13 @@ namespace HexaEditor
         /// converti la valeur donnée par l'opération précédente en ascii pour l'écrire dans le tableau correspondant
         /// </summary>
         /// <param name="value"></param>
-        public void WriteFromHexa(char value)
+        public void WriteFromHexa(char value, bool saveState)
         {
 
-            this.Model.addState(Convert.ToChar(this.asciiValues[this.SelectedCase]), this.SelectedCase);
+            if (saveState)
+            {
+                this.Model.addState(this.values[this.SelectedCase], this.SelectedCase);
+            }
 
             string reff = this.values[this.SelectedCase];
 
@@ -431,13 +434,14 @@ namespace HexaEditor
                 }
                 else
                 {
-                    byte stateValue = Convert.ToByte(result[0]);
-                    char[] tmpID = new char[result.Length - 1];
-                    Array.Copy(result.ToCharArray(), 1, tmpID, 0, result.Length - 1);
+                    string stateValue = (result[0] + result[1]).ToString() ;
+                    char[] tmpID = new char[result.Length - 2];
+                    Array.Copy(result.ToCharArray(), 2, tmpID, 0, result.Length - 2);
                     int stateID = Convert.ToInt32(new string(tmpID));
 
                     this.SelectedCase = stateID;
-                    this.WriteFromAscii(Convert.ToChar(stateValue), false);
+                    this.WriteFromHexa(result[0], false);
+                    this.WriteFromHexa(result[1], false);
                 }
             }
         }
